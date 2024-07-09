@@ -11,12 +11,30 @@ interface PokemonList {
   }[];
 }
 
+export interface PokemonData {
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+  height: number;
+  weight: number;
+}
+
 export const fetchPokemonList = async (
   limit: number = 150
 ): Promise<PokemonList> => {
   const response = await api.get<PokemonList>(`/pokemon`, {
     params: {
       limit: limit,
+    },
+  });
+  return response.data;
+};
+
+export const fetchPokemon = async (name: string): Promise<PokemonData> => {
+  const response = await api.get<PokemonData>(`/pokemon`, {
+    params: {
+      name,
     },
   });
   return response.data;
