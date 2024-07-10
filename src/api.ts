@@ -11,6 +11,11 @@ interface PokemonList {
   }[];
 }
 
+interface PokemonTypeInfo {
+  slot: number;
+  type: Type;
+}
+
 export interface PokemonData {
   name: string;
   sprites: {
@@ -18,6 +23,7 @@ export interface PokemonData {
   };
   height: number;
   weight: number;
+  types: PokemonTypeInfo[];
 }
 
 export const fetchPokemonList = async (

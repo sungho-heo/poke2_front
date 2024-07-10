@@ -1,6 +1,13 @@
 import React from "react";
+import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
 import { fetchPokemonList, fetchPokemon, PokemonData } from "../api";
+
+// css
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+`;
 
 const Home: React.FC = () => {
   // 포켓몬 이름 받아오기
@@ -29,17 +36,24 @@ const Home: React.FC = () => {
   if (listLoading) return <h1>...Loading</h1>;
   if (listError instanceof Error) return <h1>Error: {listError.message}</h1>;
   return (
-    <div>
+    <GridContainer>
       {pokemonInfo?.map((query, index) => {
         const { data, error, isLoading } = query;
+        if (isLoading) return <h1>Loading...</h1>;
+        if (error instanceof Error) return <h1>Error:{error.message}</h1>;
+        console.log(data);
         return (
           <div key={index}>
             <h2>{data?.name}</h2>
             <img src={data?.sprites.front_default} />
+            <p>
+              type:{" "}
+              {data?.types.map((typeDetail) => typeDetail.type.name).join(",")}
+            </p>
           </div>
         );
       })}
-    </div>
+    </GridContainer>
   );
 };
 
