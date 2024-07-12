@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import {
   fetchPokemonList,
   fetchPokemon,
@@ -8,45 +10,36 @@ import {
   PokemonData,
   fetchPokemonSpecies,
 } from "../api";
+import { GridContainer, Container } from "../styles/CommonStyles";
 
 // css
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 20px;
-  width: 100%;
-  justify-content: center;
-`;
-
-export const Container = styled.div`
-  padding: 20px;
+const SearchContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
+  background-color: #393939 !important;
 `;
 
 const SearchInput = styled.input`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 1000px;
-  height: 55px;
-  margin: 0 auto;
+  padding: 20px;
   background: #0e0e0e;
   color: #fff;
-  border-radius: 0 !important;
 `;
-const PokeDex = styled.h2`
+const PokeDex = styled.img`
   display: flex;
-  width: 170px;
-  padding: 0;
-  padding-left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px solid black;
+  padding: 10px;
 `;
 
-// search type.
-interface SearchType {
-  searchPokemon: string;
-  setSearchPokemon: (value: string) => void;
-}
+const SearchIcon = styled.div`
+  height: 55px;
+  width: 55px;
+`;
 
 const Home: React.FC = () => {
   const [searchPokemon, setSearchPokemon] = useState<string>("");
@@ -111,17 +104,22 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <div>
-        <PokeDex>포켓몬 도감</PokeDex>
-        <div>
-          <SearchInput
-            type="text"
-            placeholder="포켓몬 이름을 입력해주세요."
-            value={searchPokemon}
-            onChange={handleSearch}
-          />
-        </div>
-      </div>
+      <SearchContainer>
+        <form>
+          <PokeDex src="./logo.jpeg" />
+          <div>
+            <SearchInput
+              type="text"
+              placeholder="포켓몬 이름을 입력해주세요."
+              value={searchPokemon}
+              onChange={handleSearch}
+            />
+            <SearchIcon>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </SearchIcon>
+          </div>
+        </form>
+      </SearchContainer>
       <GridContainer>
         {filterPokemon?.map((query, index) => {
           const { data, error, isLoading } = query;
