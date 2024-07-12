@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
 import {
@@ -13,9 +13,44 @@ import {
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  padding: 20px;
+  width: 100%;
+  justify-content: center;
 `;
 
+export const Container = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const SearchInput = styled.input`
+  display: flex;
+  width: 1000px;
+  height: 55px;
+  margin: 0 auto;
+  background: #0e0e0e;
+  color: #fff;
+  border-radius: 0 !important;
+`;
+const PokeDex = styled.h2`
+  display: flex;
+  width: 170px;
+  padding: 0;
+  padding-left: 15px;
+`;
+
+// search type.
+interface SearchType {
+  searchPokemon: string;
+  setSearchPokemon: (value: string) => void;
+}
+
 const Home: React.FC = () => {
+  const [searchPokemon, setSearchPokemon] = useState<string>("");
+
   // 포켓몬 이름 받아오기
   const {
     data: listData,
@@ -59,29 +94,55 @@ const Home: React.FC = () => {
     })),
   }) as UseQueryResult<PokemonData & { koreaName: string }>[];
 
+  // search
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchPokemon(event.target.value);
+  };
+
+  const filterPokemon = searchPokemon
+    ? pokemonInfo.filter((query) =>
+        query.data?.koreaName.includes(searchPokemon)
+      )
+    : pokemonInfo;
+
   // 에러및 로딩 화면.
   if (listLoading) return <h1>...Loading</h1>;
   if (listError instanceof Error) return <h1>Error: {listError.message}</h1>;
 
   return (
-    <GridContainer>
-      {pokemonInfo?.map((query, index) => {
-        const { data, error, isLoading } = query;
-        if (isLoading) return <h1 key={index}>Loading...</h1>;
-        if (error instanceof Error)
-          return <h1 key={index}>Error:{error.message}</h1>;
-        return (
-          <div key={index}>
-            <h2>{data?.koreaName}</h2>
-            <img src={data?.sprites.front_default} />
-            <p>
-              타입:
-              {data?.types.map((typeDetail) => typeDetail.type.name).join(",")}
-            </p>
-          </div>
-        );
-      })}
-    </GridContainer>
+    <Container>
+      <div>
+        <PokeDex>포켓몬 도감</PokeDex>
+        <div>
+          <SearchInput
+            type="text"
+            placeholder="포켓몬 이름을 입력해주세요."
+            value={searchPokemon}
+            onChange={handleSearch}
+          />
+        </div>
+      </div>
+      <GridContainer>
+        {filterPokemon?.map((query, index) => {
+          const { data, error, isLoading } = query;
+          if (isLoading) return <h1 key={index}>Loading...</h1>;
+          if (error instanceof Error)
+            return <h1 key={index}>Error:{error.message}</h1>;
+          return (
+            <div key={index}>
+              <h2>{data?.koreaName}</h2>
+              <img src={data?.sprites.front_default} />
+              <p>
+                타입:
+                {data?.types
+                  .map((typeDetail) => typeDetail.type.name)
+                  .join(",")}
+              </p>
+            </div>
+          );
+        })}
+      </GridContainer>
+    </Container>
   );
 };
 
