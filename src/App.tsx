@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled, { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
+import Detail from "./components/Detail";
 
 // queryClient type지정
 const queryClient = new QueryClient();
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/pokemon/:name" element={<Detail />} />
         </Routes>
       </Router>
     </QueryClientProvider>

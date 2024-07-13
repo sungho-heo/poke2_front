@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -129,7 +130,9 @@ const Home: React.FC = () => {
           return (
             <div key={index}>
               <h2>{data?.koreaName}</h2>
-              <img src={data?.sprites.front_default} />
+              <Link to={`/pokemon/${data?.name}`}>
+                <img src={data?.sprites.front_default} alt={data?.name} />
+              </Link>
               <p>
                 타입:
                 {data?.types

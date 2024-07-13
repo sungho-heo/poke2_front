@@ -31,6 +31,7 @@ export interface PokemonData {
   height: number;
   weight: number;
   types: PokemonTypeInfo[];
+  koreaName: string;
 }
 
 // 한글화 데이터 타입
