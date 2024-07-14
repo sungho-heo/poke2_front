@@ -32,6 +32,14 @@ export interface PokemonData {
   weight: number;
   types: PokemonTypeInfo[];
   koreaName: string;
+  abilities: Ablity[];
+}
+// 포켓몬 특성
+interface Ablity {
+  ability: {
+    name: string;
+    url: string;
+  };
 }
 
 // 한글화 데이터 타입
@@ -76,7 +84,7 @@ export const fetchPokemonSpecies = async (
   return response.data;
 };
 
-export const fetchTypeData = async (url: stirng): Promise<TypeData> => {
+export const fetchTypeData = async (url: string): Promise<TypeData> => {
   const response = await api.get(url);
   return response.data;
 };

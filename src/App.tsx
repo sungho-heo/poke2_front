@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styled, { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
@@ -10,8 +10,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <Title src="./main.png"></Title>
       <Router>
+        <Link to="/">
+          <Title src="./main.png" alt="Home" />
+        </Link>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pokemon/:name" element={<Detail />} />

@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueries } from "@tanstack/react-query";
 import styled from "styled-components";
-import { fetchPokemon } from "../api";
+import { fetchPokemon, fetchTypeData } from "../api";
 import { Container } from "../styles/CommonStyles";
 
 const Detail: React.FC = () => {
@@ -14,10 +14,21 @@ const Detail: React.FC = () => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
+  const pokemonAbility = useQueries({
+    queries: (data?.abilities || []).map((a) => ({
+      queryKey: ["a", a.url],
+      queryFn: async () => {
+        const ablityData = await fetchTypeData(a?.url);
+        const koreaAbility =
+          ablityData.names.find((name) => name.language.name === "ko")?.name ||
+          ablityData;
+        return { koreaAbility };
+      },
+    })),
+  });
   if (isLoading) return <Container>Loading...</Container>;
   if (error instanceof Error)
     return <Container>Error:{error.message}</Container>;
-  console.log(data);
   return (
     <Container>
       <div>
