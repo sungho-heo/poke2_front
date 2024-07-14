@@ -10,6 +10,7 @@ import {
   fetchTypeData,
   PokemonData,
   fetchPokemonSpecies,
+  fetchAbility,
 } from "../api";
 import { GridContainer, Container } from "../styles/CommonStyles";
 
@@ -82,7 +83,26 @@ const Home: React.FC = () => {
           })
         );
 
-        return { ...pokemonData, koreaName, types: typeNames };
+        // 포켓몬 특성 데이터 한글화과정.
+        const abilityNames = await Promise.all(
+          pokemonData.abilities.map(async (abilityInfo) => {
+            const abiltyData = await fetchAbility(abilityInfo.ability.url);
+            const koreaAbilityName =
+              abiltyData.names.find((name) => name.language.name === "ko")
+                ?.name || abilityInfo.ability.name;
+            return {
+              ...abilityInfo,
+              ability: { ...abilityInfo.ability, name: koreaAbilityName },
+            };
+          })
+        );
+
+        return {
+          ...pokemonData,
+          koreaName,
+          types: typeNames,
+          abilities: abilityNames,
+        };
       },
       staleTime: 1000 * 60 * 5, // 5 minutes
     })),

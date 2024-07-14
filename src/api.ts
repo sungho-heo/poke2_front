@@ -65,6 +65,18 @@ interface TypeData {
   names: TypeName[];
 }
 
+// 툭성 한글화 과정
+interface AbilityName {
+  language: {
+    name: string;
+  };
+  name: string;
+}
+
+interface AbilityData {
+  names: AbilityName[];
+}
+
 export const fetchPokemonList = async (
   limit: number = 150
 ): Promise<PokemonList> => {
@@ -85,6 +97,11 @@ export const fetchPokemonSpecies = async (
 };
 
 export const fetchTypeData = async (url: string): Promise<TypeData> => {
+  const response = await api.get(url);
+  return response.data;
+};
+
+export const fetchAbility = async (url: string): Promise<AbilityData> => {
   const response = await api.get(url);
   return response.data;
 };
