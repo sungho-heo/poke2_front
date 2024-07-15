@@ -78,7 +78,7 @@ interface AbilityData {
 }
 
 export const fetchPokemonList = async (
-  limit: number = 150
+  limit: number = 151
 ): Promise<PokemonList> => {
   const response = await api.get<PokemonList>(`/pokemon?limit=${limit}`);
   return response.data;

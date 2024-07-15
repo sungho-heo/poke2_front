@@ -12,6 +12,7 @@ const Detail: React.FC = () => {
     queryFn: () => fetchPokemon(name!),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
+  console.log(data);
   if (isLoading) return <Container>Loading...</Container>;
   if (error instanceof Error)
     return <Container>Error:{error.message}</Container>;

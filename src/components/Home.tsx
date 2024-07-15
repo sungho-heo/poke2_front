@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faStar as solidStar,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import {
   fetchPokemonList,
   fetchPokemon,
@@ -43,8 +47,13 @@ const SearchIcon = styled.div`
   width: 55px;
 `;
 
+// type
+interface Fav {
+  favorites: string[];
+}
 const Home: React.FC = () => {
   const [searchPokemon, setSearchPokemon] = useState<string>("");
+  const [fav, setFav] = useState<boolean>(false);
 
   // 포켓몬 이름 받아오기
   const {
@@ -119,10 +128,18 @@ const Home: React.FC = () => {
       )
     : pokemonInfo;
 
+  // togglefav
+  const favToggle = () => {
+    if (fav === true) {
+      setFav(false);
+    } else {
+      setFav(true);
+    }
+  };
+
   // 에러및 로딩 화면.
   if (listLoading) return <h1>...Loading</h1>;
   if (listError instanceof Error) return <h1>Error: {listError.message}</h1>;
-
   return (
     <Container>
       <SearchContainer>
@@ -149,6 +166,9 @@ const Home: React.FC = () => {
             return <h1 key={index}>Error:{error.message}</h1>;
           return (
             <div key={index}>
+              <button onClick={favToggle}>
+                <FontAwesomeIcon icon={fav ? solidStar : regularStar} />
+              </button>
               <h2>{data?.koreaName}</h2>
               <Link to={`/pokemon/${data?.name}`}>
                 <img src={data?.sprites.front_default} alt={data?.name} />
