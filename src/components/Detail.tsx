@@ -1,7 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPokemon } from "../api";
+import {
+  fetchPokemon,
+  fetchPokemonSpecies,
+  fetchTypeData,
+  fetchAbility,
+} from "../api";
 import { Container } from "../styles/CommonStyles";
 
 const Detail: React.FC = () => {
@@ -9,10 +14,53 @@ const Detail: React.FC = () => {
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["pokemon", name],
-    queryFn: () => fetchPokemon(name!),
+    queryFn: async () => {
+      // 포켓몬 데이터 받아오기
+      const pokemonData = await fetchPokemon(name!);
+
+      // 포켓몬 이름 한글화
+      const speciesData = await fetchPokemonSpecies(name!);
+      const koreaName =
+        speciesData.names.find((name) => name.language.name === "ko")?.name ||
+        pokemonData.name;
+
+      // 타입 한글화
+      const typeNames = await Promise.all(
+        pokemonData.types.map(async (typeInfo) => {
+          const typeData = await fetchTypeData(typeInfo.type.url);
+          const koreaTypeName =
+            typeData.names.find((name) => name.language.name === "ko")?.name ||
+            typeInfo.type.name;
+          return {
+            ...typeInfo,
+            type: { ...typeInfo.type, name: koreaTypeName },
+          };
+        })
+      );
+
+      // 특성 한글화
+      const abilityNames = await Promise.all(
+        pokemonData.abilities.map(async (abilityInfo) => {
+          const abilityData = await fetchAbility(abilityInfo.ability.url);
+          const koreaAbilityName =
+            abilityData.names.find((name) => name.language.name === "ko")
+              ?.name || abilityInfo.ability.name;
+          return {
+            ...abilityInfo,
+            ability: { ...abilityInfo.ability, name: koreaAbilityName },
+          };
+        })
+      );
+
+      return {
+        ...pokemonData,
+        koreaName,
+        types: typeNames,
+        abilities: abilityNames,
+      };
+    },
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
-  console.log(data);
   if (isLoading) return <Container>Loading...</Container>;
   if (error instanceof Error)
     return <Container>Error:{error.message}</Container>;
