@@ -8,15 +8,9 @@ import {
   faStar as solidStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-import {
-  fetchPokemonList,
-  fetchPokemon,
-  fetchTypeData,
-  PokemonData,
-  fetchPokemonSpecies,
-  fetchAbility,
-} from "../api";
+import { fetchPokemonList, PokemonData } from "../api";
 import { GridContainer, Container } from "../styles/CommonStyles";
+import { getPokemonDataKorea } from "../utils";
 
 // css
 const SearchContainer = styled.div`
@@ -70,49 +64,7 @@ const Home: React.FC = () => {
   const pokemonInfo = useQueries({
     queries: (listData?.results || []).map((pokemon) => ({
       queryKey: ["pokemon", pokemon.name],
-      queryFn: async () => {
-        // 포켓몬이름 한글화 과정
-        const pokemonData = await fetchPokemon(pokemon?.name);
-        const speciesData = await fetchPokemonSpecies(pokemon?.name);
-        const koreaName =
-          speciesData.names.find((name) => name.language.name === "ko")?.name ||
-          pokemonData.name;
-
-        // 타입 한글화 과정.
-        const typeNames = await Promise.all(
-          pokemonData.types.map(async (typeInfo) => {
-            const typeData = await fetchTypeData(typeInfo.type.url);
-            const koreaTypeName =
-              typeData.names.find((name) => name.language.name === "ko")
-                ?.name || typeInfo.type.name;
-            return {
-              ...typeInfo,
-              type: { ...typeInfo.type, name: koreaTypeName },
-            };
-          })
-        );
-
-        // 포켓몬 특성 데이터 한글화과정.
-        const abilityNames = await Promise.all(
-          pokemonData.abilities.map(async (abilityInfo) => {
-            const abiltyData = await fetchAbility(abilityInfo.ability.url);
-            const koreaAbilityName =
-              abiltyData.names.find((name) => name.language.name === "ko")
-                ?.name || abilityInfo.ability.name;
-            return {
-              ...abilityInfo,
-              ability: { ...abilityInfo.ability, name: koreaAbilityName },
-            };
-          })
-        );
-
-        return {
-          ...pokemonData,
-          koreaName,
-          types: typeNames,
-          abilities: abilityNames,
-        };
-      },
+      queryFn: () => getPokemonDataKorea(pokemon.name),
       staleTime: 1000 * 60 * 5, // 5 minutes
     })),
   }) as UseQueryResult<PokemonData & { koreaName: string }>[];
@@ -130,11 +82,7 @@ const Home: React.FC = () => {
 
   // togglefav
   const favToggle = () => {
-    if (fav === true) {
-      setFav(false);
-    } else {
-      setFav(true);
-    }
+    setFav(!fav);
   };
 
   // 에러및 로딩 화면.
