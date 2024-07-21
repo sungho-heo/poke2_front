@@ -4,6 +4,8 @@ import { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import Header from "./components/Header";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 // queryClient type지정
 const queryClient = new QueryClient();
@@ -15,6 +17,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/pokemon/:name" element={<Detail />} />
         </Routes>
       </Router>
@@ -33,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     line-height: 1.5;
     font-weight: 400;
+    font-size: 16px;
 
     color-scheme: light dark;
     color: #010100;
@@ -53,6 +58,13 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     justfy-content: center;
   }
+  *{
+      box-sizing: border-box;
+  }
+label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
 `;
 
 export default App;

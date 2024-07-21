@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Logo } from "../styles/CommonStyles";
 
 // css
 
@@ -10,10 +11,6 @@ const LogoContainer = styled.h1`
   width: 17%;
   align-items: center;
   justify-content: center;
-`;
-const Logo = styled.img`
-  vertical-align: top;
-  max-width: 150px;
 `;
 
 // header
