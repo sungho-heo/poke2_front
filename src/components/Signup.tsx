@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import {
   authSection as SignupSection,
   Logo2,
@@ -9,25 +11,36 @@ import {
   FormGroup,
   Button,
 } from "../styles/CommonStyles";
+import { apiSignup, SignupParams, AuthResponse } from "../api/auth";
 
 const Signup: React.FC = () => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const navigate = useNavigate();
+
+  // backend frontend connect data;
+  const mutation = useMutation<AuthResponse, Error, SignupParams>({
+    mutationFn: apiSignup,
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== password2) {
-      return;
+      return mutation.isError && <p>Error: {mutation.error.message}</p>;
     }
+    mutation.mutate({ nickname, email, password });
   };
   return (
     <SignupSection>
       <TitileContainer>
         <Logo2 src="./main.png" alt="Signup" />
         <FormContainer>
-          <form>
+          <form onSubmit={handleSubmit}>
             <FormGroup>
               <Label htmlFor="Nickname">Nickname</Label>
               <Input
