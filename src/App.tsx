@@ -1,30 +1,50 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createGlobalStyle } from "styled-components";
+import { useState } from "react";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Notification from "./components/Notification";
+import { AuthProvider } from "./context/AuthContext";
 
-// queryClient type지정
-const queryClient = new QueryClient();
-function App() {
+const App: React.FC = () => {
+  // 알림메세지
+  const [notification, setNotification] = useState<string | null>(null);
+
+  // queryClient type지정
+  const queryClient = new QueryClient();
+
+  const showNotification = (message: string) => {
+    setNotification(message);
+  };
+
+  const handleNotification = () => {
+    setNotification(null);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/pokemon/:name" element={<Detail />} />
-        </Routes>
+        <AuthProvider>
+          <Header />
+          {notification && (
+            <Notification message={notification} onClose={handleNotification} />
+          )}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/pokemon/:name" element={<Detail />} />
+          </Routes>
+        </AuthProvider>
       </Router>
     </QueryClientProvider>
   );
-}
+};
 
 const GlobalStyle = createGlobalStyle`
   body {
