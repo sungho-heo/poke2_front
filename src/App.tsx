@@ -36,8 +36,14 @@ const App: React.FC = () => {
           )}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/login"
+              element={<Login showNotification={showNotification} />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup showNotification={showNotification} />}
+            />
             <Route path="/pokemon/:name" element={<Detail />} />
           </Routes>
         </AuthProvider>

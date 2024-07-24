@@ -12,8 +12,14 @@ import {
   Button,
 } from "../styles/CommonStyles";
 import { apiLogin, LoginParams, AuthResponse } from "../api/auth";
+import { useAuth } from "../context/AuthContext";
 
-const Login: React.FC = () => {
+export interface NotificationProps {
+  showNotification: (message: string) => void;
+}
+
+const Login: React.FC<NotificationProps> = ({ showNotification }) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -26,7 +32,9 @@ const Login: React.FC = () => {
       localStorage.setItem("token", data.token);
 
       // 로그인 성공하면 home으로
+      login(data.token);
       navigate("/");
+      showNotification("Login successful!");
     },
   });
 
@@ -61,6 +69,7 @@ const Login: React.FC = () => {
             </FormGroup>
             <Button type="submit">Login</Button>
           </form>
+          {mutation.isError && <p>Error: {mutation.error.message}</p>}
         </FormContainer>
       </TitileContainer>
     </LoginSection>

@@ -12,8 +12,11 @@ import {
   Button,
 } from "../styles/CommonStyles";
 import { apiSignup, SignupParams, AuthResponse } from "../api/auth";
+import { NotificationProps } from "./Login";
+import { useAuth } from "../context/AuthContext";
 
-const Signup: React.FC = () => {
+const Signup: React.FC<NotificationProps> = ({ showNotification }) => {
+  const { login } = useAuth();
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +26,9 @@ const Signup: React.FC = () => {
   // backend frontend connect data;
   const mutation = useMutation<AuthResponse, Error, SignupParams>({
     mutationFn: apiSignup,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      login(data.token);
+      showNotification("Signup successful!");
       navigate("/");
     },
   });
@@ -31,6 +36,7 @@ const Signup: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== password2) {
+      showNotification("Passwords do not match");
       return mutation.isError && <p>Error: {mutation.error.message}</p>;
     }
     mutation.mutate({ nickname, email, password });
@@ -79,6 +85,7 @@ const Signup: React.FC = () => {
             </FormGroup>
             <Button type="submit">Signup</Button>
           </form>
+          {mutation.isError && <p>Error: {mutation.error.message}</p>}
         </FormContainer>
       </TitileContainer>
     </SignupSection>
