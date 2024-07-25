@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Notification from "./components/Notification";
+import Profile from "./components/Profile";
 import { AuthProvider } from "./context/AuthContext";
 
 const App: React.FC = () => {
@@ -45,6 +46,7 @@ const App: React.FC = () => {
               element={<Signup showNotification={showNotification} />}
             />
             <Route path="/pokemon/:name" element={<Detail />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </AuthProvider>
       </Router>
