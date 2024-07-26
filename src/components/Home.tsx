@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  useQueries,
+  useQuery,
+  useMutation,
+} from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,8 +14,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { fetchPokemonList, PokemonData } from "../api";
-import { GridContainer, Container } from "../styles/CommonStyles";
+import { addFav, removeFav } from "../api/fav";
+import {
+  GridContainer,
+  Container,
+  PokemonList,
+  ImageContainer,
+  PokemonImageContainer,
+  PokemonImage,
+} from "../styles/CommonStyles";
 import { getPokemonDataKorea } from "../utils";
+import { useAuth } from "../context/AuthContext";
 
 // css
 const SearchContainer = styled.div`
@@ -41,13 +55,9 @@ const SearchIcon = styled.div`
   width: 55px;
 `;
 
-// type
-interface Fav {
-  favorites: string[];
-}
 const Home: React.FC = () => {
   const [searchPokemon, setSearchPokemon] = useState<string>("");
-  const [fav, setFav] = useState<boolean>(false);
+  const { token, fav, setFav } = useAuth();
 
   // 포켓몬 이름 받아오기
   const {
@@ -69,6 +79,31 @@ const Home: React.FC = () => {
     })),
   }) as UseQueryResult<PokemonData & { koreaName: string }>[];
 
+  // addFav
+  const addFavMutation = useMutation({
+    mutationFn: addFav,
+    onSuccess: (data: { fav: string[] }) => {
+      setFav(data.fav);
+    },
+  });
+
+  // removeFav
+  const removeFavMutation = useMutation({
+    mutationFn: removeFav,
+    onSuccess: (data: { fav: string[] }) => {
+      setFav(data.fav);
+    },
+  });
+
+  // togglefav
+  const toggleFav = (pokemonName: string) => {
+    if (Array.isArray(fav) && fav.includes(pokemonName)) {
+      removeFavMutation.mutate({ token: token!, pokemonName });
+    } else {
+      addFavMutation.mutate({ token: token!, pokemonName });
+    }
+  };
+
   // search
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchPokemon(event.target.value);
@@ -79,11 +114,6 @@ const Home: React.FC = () => {
         query.data?.koreaName.includes(searchPokemon)
       )
     : pokemonInfo;
-
-  // togglefav
-  const favToggle = () => {
-    setFav(!fav);
-  };
 
   // 에러및 로딩 화면.
   if (listLoading) return <h1>...Loading</h1>;
@@ -112,21 +142,33 @@ const Home: React.FC = () => {
           if (isLoading) return <h1 key={index}>Loading...</h1>;
           if (error instanceof Error)
             return <h1 key={index}>Error:{error.message}</h1>;
+
+          const isFav = Array.isArray(fav) && fav.includes(data?.name || "");
+
           return (
-            <div key={index}>
-              <button onClick={favToggle}>
-                <FontAwesomeIcon icon={fav ? solidStar : regularStar} />
-              </button>
-              <h2>{data?.koreaName}</h2>
-              <Link to={`/pokemon/${data?.name}`}>
-                <img src={data?.sprites.front_default} alt={data?.name} />
-              </Link>
-              <p>
-                타입:
-                {data?.types
-                  .map((typeDetail) => typeDetail.type.name)
-                  .join(",")}
-              </p>
+            <div>
+              <PokemonList key={index}>
+                <button onClick={() => toggleFav(data?.name || "")}>
+                  <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
+                </button>
+                <h2>{data?.koreaName}</h2>
+                <Link to={`/pokemon/${data?.name}`}>
+                  <ImageContainer>
+                    <PokemonImageContainer>
+                      <PokemonImage
+                        src={data?.sprites.front_default}
+                        alt={data?.name}
+                      />
+                    </PokemonImageContainer>
+                  </ImageContainer>
+                  <p>
+                    타입:
+                    {data?.types
+                      .map((typeDetail) => typeDetail.type.name)
+                      .join(",")}
+                  </p>
+                </Link>
+              </PokemonList>
             </div>
           );
         })}

@@ -12,6 +12,7 @@ import {
   Button,
 } from "../styles/CommonStyles";
 import { apiLogin, LoginParams, AuthResponse } from "../api/auth";
+import { fetchFav } from "../api/fav";
 import { useAuth } from "../context/AuthContext";
 
 export interface NotificationProps {
@@ -19,7 +20,7 @@ export interface NotificationProps {
 }
 
 const Login: React.FC<NotificationProps> = ({ showNotification }) => {
-  const { login } = useAuth();
+  const { login, setFav } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -30,6 +31,12 @@ const Login: React.FC<NotificationProps> = ({ showNotification }) => {
     onSuccess: async (data) => {
       // token 만료전까지 저장하기
       localStorage.setItem("token", data.token);
+
+      // 유저의 즐겨찾기 포켓몬 데이터 가져옴. 있을경우.
+      const favData = await fetchFav(data.token);
+
+      // 가져온 데이터 임시저장 데이터저장소
+      setFav(favData);
 
       // 로그인 성공하면 home으로
       login(data.token);

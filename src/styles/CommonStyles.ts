@@ -92,3 +92,33 @@ export const Button = styled.button`
   font-size: 21px;
   font-weight: 700;
 `;
+
+// 포켓몬 css
+export const PokemonList = styled.li`
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 40px 0;
+`;
+
+export const ImageContainer = styled.div`
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  transition: 0.5s;
+  width: 100%;
+`;
+
+export const PokemonImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 10px;
+`;
+export const PokemonImage = styled.img`
+  width: 100%;
+  height: auto;
+  &:hover {
+    transition: transform 0.5s;
+    transform: scale(1) translate(0, -5%);
+  }
+`;

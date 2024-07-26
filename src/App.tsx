@@ -93,6 +93,9 @@ label {
     margin-bottom: 0;
     cursor: pointer;
 }
+    li{
+    list-style: none;
+    }
 `;
 
 export default App;
