@@ -93,9 +93,13 @@ label {
     margin-bottom: 0;
     cursor: pointer;
 }
-    li{
+  li{
     list-style: none;
-    }
+  }
+  form{
+      margin: 0;
+      padding: 0;
+  }
 `;
 
 export default App;

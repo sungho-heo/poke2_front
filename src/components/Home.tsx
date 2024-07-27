@@ -28,31 +28,63 @@ import { useAuth } from "../context/AuthContext";
 
 // css
 const SearchContainer = styled.div`
-  display: flex;
   width: 100%;
+  margin-top: 100px;
+  padding: 30px 25px 20px;
   background-color: #393939 !important;
 `;
 
 const SearchInput = styled.input`
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 55px;
+  background: #0e0e0e;
+  border-radius: 0 !important;
+`;
+const PokemonLogo = styled.img`
+  max-width: 50%;
   display: flex;
+  margin-top: 5px;
   align-items: center;
   justify-content: center;
-  width: 1000px;
-  padding: 20px;
-  background: #0e0e0e;
-  color: #fff;
-`;
-const PokeDex = styled.img`
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px solid black;
-  padding: 10px;
 `;
 
-const SearchIcon = styled.div`
+const SearchRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const InputButtonContainer = styled.div`
+  flex: 1;
+  max-width: inherit;
+`;
+
+const InputButtonContainer2 = styled.div`
+  position: relative;
+  float: none !important;
+  width: 100% !important;
+  height: 55px;
+  background: #fff;
+`;
+
+const LogoContainer = styled.div`
+  width: 90px;
+  min-width: 90px;
+  padding: 0;
+`;
+
+const SearchIconButton = styled.button`
+  position: absolute;
+  right: 0;
+  color: white;
   height: 55px;
   width: 55px;
+  background-color: #da343c !important;
+  border-color: #da343c !important;
+  color: #fff !important;
+  cursor: pointer;
 `;
 
 const Home: React.FC = () => {
@@ -122,18 +154,24 @@ const Home: React.FC = () => {
     <Container>
       <SearchContainer>
         <form>
-          <PokeDex src="./logo.jpeg" />
-          <div>
-            <SearchInput
-              type="text"
-              placeholder="포켓몬 이름을 입력해주세요."
-              value={searchPokemon}
-              onChange={handleSearch}
-            />
-            <SearchIcon>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </SearchIcon>
-          </div>
+          <SearchRow>
+            <LogoContainer>
+              <PokemonLogo src="./logo.png" />
+            </LogoContainer>
+            <InputButtonContainer>
+              <InputButtonContainer2>
+                <SearchInput
+                  type="text"
+                  placeholder="포켓몬 이름을 입력해주세요."
+                  value={searchPokemon}
+                  onChange={handleSearch}
+                />
+                <SearchIconButton type="submit">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </SearchIconButton>
+              </InputButtonContainer2>
+            </InputButtonContainer>
+          </SearchRow>
         </form>
       </SearchContainer>
       <GridContainer>
