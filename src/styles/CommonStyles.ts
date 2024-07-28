@@ -113,6 +113,7 @@ export const PokemonImageContainer = styled.div`
   width: 100%;
   padding: 10px 10px;
 `;
+
 export const PokemonImage = styled.img`
   width: 100%;
   height: auto;
