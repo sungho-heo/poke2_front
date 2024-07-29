@@ -100,6 +100,20 @@ label {
       margin: 0;
       padding: 0;
   }
+
+  h3{
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h4{
+    font-size: 16px;
+    font-weight: 500;
+    color: #858585;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
 `;
 
 export default App;

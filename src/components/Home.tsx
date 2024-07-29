@@ -184,30 +184,25 @@ const Home: React.FC = () => {
           const isFav = Array.isArray(fav) && fav.includes(data?.name || "");
 
           return (
-            <div>
-              <PokemonList key={index}>
-                <button onClick={() => toggleFav(data?.name || "")}>
-                  <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
-                </button>
-                <h2>{data?.koreaName}</h2>
-                <Link to={`/pokemon/${data?.name}`}>
-                  <ImageContainer>
-                    <PokemonImageContainer>
-                      <PokemonImage
-                        src={data?.sprites.front_default}
-                        alt={data?.name}
-                      />
-                    </PokemonImageContainer>
-                  </ImageContainer>
-                  <p>
-                    타입:
-                    {data?.types
-                      .map((typeDetail) => typeDetail.type.name)
-                      .join(",")}
-                  </p>
-                </Link>
-              </PokemonList>
-            </div>
+            <PokemonList key={index}>
+              <button onClick={() => toggleFav(data?.name || "")}>
+                <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
+              </button>
+              <h2>{data?.koreaName}</h2>
+              <Link to={`/pokemon/${data?.name}`}>
+                <ImageContainer>
+                  <PokemonImageContainer>
+                    <PokemonImage
+                      src={data?.sprites.front_default}
+                      alt={data?.name}
+                    />
+                  </PokemonImageContainer>
+                </ImageContainer>
+                {data?.types
+                  .map((typeDetail) => typeDetail.type.name)
+                  .join(",")}
+              </Link>
+            </PokemonList>
           );
         })}
       </GridContainer>
