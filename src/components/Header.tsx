@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Notification from "./Notification";
 import { Logo } from "../styles/CommonStyles";
 
 // css
-
 // 홈페이지 메인 타이틀
 const LogoContainer = styled.h1`
   display: flex;
@@ -43,22 +44,52 @@ const HeaderLink = styled.li`
 `;
 
 const Header: React.FC = () => {
+  const { token, logout } = useAuth();
+  const [notification, setNotification] = useState<string | null>("");
+
+  // 알림 매시지
+  const showNotification = (message: string) => {
+    setNotification(message);
+  };
+
+  const handleLogout = () => {
+    logout(showNotification);
+  };
   return (
     <HeaderContainer>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <LogoContainer>
         <Link to="/">
           <Logo src="./main.png" alt="Home" />
         </Link>
       </LogoContainer>
       <HeaderList>
-        <ul>
-          <HeaderLink>
-            <Link to="/login">Login</Link>
-          </HeaderLink>
-          <HeaderLink>
-            <Link to="/signup">Sign up</Link>
-          </HeaderLink>
-        </ul>
+        {!token ? (
+          <ul>
+            <HeaderLink>
+              <Link to="/login">Login</Link>
+            </HeaderLink>
+            <HeaderLink>
+              <Link to="/signup">Signup</Link>
+            </HeaderLink>
+          </ul>
+        ) : (
+          <ul>
+            <HeaderLink>
+              <Link to="/profile">Profile</Link>
+            </HeaderLink>
+            <HeaderLink>
+              <Link to="/" onClick={handleLogout}>
+                Logout
+              </Link>
+            </HeaderLink>
+          </ul>
+        )}
       </HeaderList>
     </HeaderContainer>
   );

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPokemonDataKorea } from "../utils";
 
 // css세팅
+
 const DetailContainer = styled.div`
   max-width: 1250px;
   width: 100%;
@@ -14,6 +15,7 @@ const DetailContainer = styled.div`
   margin-right: auto;
   margin-left: auto;
 `;
+
 const DetailCard = styled.div`
   padding: 15px 50px 50px;
   border: 3px solid #333;
