@@ -45,7 +45,7 @@ const HeaderLink = styled.li`
 
 const Header: React.FC = () => {
   const { token, logout } = useAuth();
-  const [notification, setNotification] = useState<string | null>("");
+  const [notification, setNotification] = useState<string | null>(null);
 
   // 알림 매시지
   const showNotification = (message: string) => {
