@@ -177,6 +177,9 @@ const Home: React.FC = () => {
       <GridContainer>
         {filterPokemon?.map((query, index) => {
           const { data, error, isLoading } = query;
+          if (index === 57) {
+            console.log(data, index);
+          }
           if (isLoading) return <h1 key={index}>Loading...</h1>;
           if (error instanceof Error)
             return <h1 key={index}>Error:{error.message}</h1>;
