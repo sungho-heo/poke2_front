@@ -5,6 +5,10 @@ import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
 import { Logo } from "../styles/CommonStyles";
 
+// type
+interface HeaderProps {
+  toggleTheme: () => void;
+}
 // css
 // 홈페이지 메인 타이틀
 const LogoContainer = styled.h1`
@@ -43,7 +47,7 @@ const HeaderLink = styled.li`
   list-style: none;
 `;
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
   const { token, logout } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
 
@@ -55,6 +59,7 @@ const Header: React.FC = () => {
   const handleLogout = () => {
     logout(showNotification);
   };
+
   return (
     <HeaderContainer>
       {notification && (
@@ -69,6 +74,7 @@ const Header: React.FC = () => {
         </Link>
       </LogoContainer>
       <HeaderList>
+        <button onClick={toggleTheme}>Toggle Dark Mode</button>
         {!token ? (
           <ul>
             <HeaderLink>

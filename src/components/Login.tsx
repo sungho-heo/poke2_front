@@ -15,6 +15,8 @@ import { apiLogin, LoginParams, AuthResponse } from "../api/auth";
 import { fetchFav } from "../api/fav";
 import { useAuth } from "../context/AuthContext";
 
+// type
+
 export interface NotificationProps {
   showNotification: (message: string) => void;
 }

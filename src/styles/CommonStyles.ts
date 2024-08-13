@@ -82,9 +82,9 @@ export const Button = styled.button`
   margin-top: 20px;
   width: 95%;
   cursor: pointer;
-  border-color: #000 !important;
-  background-color: #000 !important;
-  color: #fff !important;
+  border-color: ${({ theme }) => theme.textColor};
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
   border-radius: 0;
   transform: skew(-20deg);
   padding: 20px 125px;
