@@ -41,7 +41,7 @@ const App: React.FC = () => {
         <GlobalStyle />
         <Router>
           <AuthProvider>
-            <Header toggleTheme={toggleTheme} />
+            <Header toggleTheme={toggleTheme} theme={theme} />
             {notification && (
               <Notification
                 message={notification}

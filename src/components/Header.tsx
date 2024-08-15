@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
 import { Logo } from "../styles/CommonStyles";
+import { lightTheme } from "../themes";
 
 // type
 interface HeaderProps {
   toggleTheme: () => void;
+  theme: any;
 }
 // css
 // 홈페이지 메인 타이틀
@@ -47,7 +49,20 @@ const HeaderLink = styled.li`
   list-style: none;
 `;
 
-const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
+const ModeButton = styled.button`
+  margin-top: 45px;
+  width: 30%;
+  cursor: pointer;
+  border-color: ${({ theme }) => theme.textColor};
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
+  border-radius: 0;
+  transform: skew(-20deg);
+  font-size: 14px;
+  font-weight: 700;
+`;
+
+const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   const { token, logout } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
 
@@ -74,7 +89,9 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
         </Link>
       </LogoContainer>
       <HeaderList>
-        <button onClick={toggleTheme}>Toggle Dark Mode</button>
+        <ModeButton onClick={toggleTheme}>
+          {theme === lightTheme ? "Dark Mode" : "Light Mode"}
+        </ModeButton>
         {!token ? (
           <ul>
             <HeaderLink>
