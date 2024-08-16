@@ -84,6 +84,11 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 16px;
   }
+    p{
+    font-size: 15px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.textColor}
+    }
 
   a {
     color: ${({ theme }) => theme.textColor}

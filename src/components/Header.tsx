@@ -30,36 +30,40 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 98px;
   box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.3);
 `;
 
 // HeaderList
 const HeaderList = styled.div`
+  padding: 30px 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 30%;
+  justify-content: space-between;
 `;
 
 const HeaderLink = styled.li`
-  margin: 0 10px;
-  padding-top: 45px;
-  font-size: 20px;
+  border-radius: 0;
   list-style: none;
+  margin-right: 20px;
+  width: 100%;
 `;
 
 const ModeButton = styled.button`
-  margin-top: 45px;
   width: 30%;
   cursor: pointer;
   border-color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.textColor};
   border-radius: 0;
-  transform: skew(-20deg);
   font-size: 14px;
   font-weight: 700;
+`;
+
+const UrlText = styled.p`
+  cursor: pointer;
+  text-transform: uppercase;
+  color: black;
 `;
 
 const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
@@ -95,10 +99,14 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
         {!token ? (
           <ul>
             <HeaderLink>
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                <UrlText>Login</UrlText>
+              </Link>
             </HeaderLink>
             <HeaderLink>
-              <Link to="/signup">Signup</Link>
+              <Link to="/signup">
+                <UrlText>Signup</UrlText>
+              </Link>
             </HeaderLink>
           </ul>
         ) : (

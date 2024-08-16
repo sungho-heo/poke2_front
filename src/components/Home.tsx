@@ -198,9 +198,11 @@ const Home: React.FC = () => {
                     />
                   </PokemonImageContainer>
                 </ImageContainer>
-                {data?.types
-                  .map((typeDetail) => typeDetail.type.name)
-                  .join(",")}
+                <p>
+                  {data?.types
+                    .map((typeDetail) => typeDetail.type.name)
+                    .join(",")}
+                </p>
               </Link>
             </PokemonList>
           );
