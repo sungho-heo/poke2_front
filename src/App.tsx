@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Notification from "./components/Notification";
 import Profile from "./components/Profile";
+import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { lightTheme, darkTheme } from "./themes";
 
@@ -61,6 +62,7 @@ const App: React.FC = () => {
               <Route path="/pokemon/:name" element={<Detail />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
+            <Footer />
           </AuthProvider>
         </Router>
       </ThemeProvider>
@@ -84,11 +86,12 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 16px;
   }
-    p{
+
+  p {
     font-size: 15px;
     font-weight: 700;
     color: ${({ theme }) => theme.textColor}
-    }
+  }
 
   a {
     color: ${({ theme }) => theme.textColor}
@@ -127,12 +130,13 @@ label {
     font-size: 45px;
     font-weight: 700;
     line-height: 1.2;
+    color: ${({ theme }) => theme.textColor};
   }
 
   h4{
     font-size: 16px;
     font-weight: 500;
-    color: #858585;
+    color: ${({ theme }) => theme.textColor};
     line-height: 1.2;
     margin-bottom: 5px;
   }

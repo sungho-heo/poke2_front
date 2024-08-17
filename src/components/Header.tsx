@@ -26,7 +26,7 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   position: fixed;
   z-index: 50;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.backgroundColor};
   top: 0;
   left: 0;
   right: 0;
@@ -63,7 +63,7 @@ const ModeButton = styled.button`
 const UrlText = styled.p`
   cursor: pointer;
   text-transform: uppercase;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {

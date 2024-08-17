@@ -20,7 +20,7 @@ const DetailCard = styled.div`
   padding: 15px 50px 50px;
   border: 3px solid #333;
   border-radius: 0 0 10px 10px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +33,8 @@ const ImgContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex: 0 0 50%;
-  min-width: 500px;
+  border: 1px solid #e8e8e8;
+  border-radius: 7px;
 `;
 const Img = styled.img`
   width: 390px;
@@ -98,7 +99,11 @@ const Detail: React.FC = () => {
               <TextContainer>
                 <h4>타입</h4>
                 <div>
-                  {data?.types.map((typeInfo) => typeInfo.type.name).join(",")}
+                  <p>
+                    {data?.types
+                      .map((typeInfo) => typeInfo.type.name)
+                      .join(",")}
+                  </p>
                 </div>
               </TextContainer>
               <TextContainer>
@@ -112,9 +117,11 @@ const Detail: React.FC = () => {
               <TextContainer>
                 <h4>특성</h4>
                 <div>
-                  {data?.abilities
-                    .map((abilityDetail) => abilityDetail.ability.name)
-                    .join(",")}
+                  <p>
+                    {data?.abilities
+                      .map((abilityDetail) => abilityDetail.ability.name)
+                      .join(",")}
+                  </p>
                 </div>
               </TextContainer>
             </PokemonInfoContainer>
