@@ -87,6 +87,12 @@ const SearchIconButton = styled.button`
   cursor: pointer;
 `;
 
+// fav button
+const FavButton = styled.button`
+  background-color: #ffff00;
+  border-radius: 10px solid black;
+`;
+
 const Home: React.FC = () => {
   const [searchPokemon, setSearchPokemon] = useState<string>("");
   const { token, fav, setFav } = useAuth();
@@ -185,9 +191,9 @@ const Home: React.FC = () => {
 
           return (
             <PokemonList key={index}>
-              <button onClick={() => toggleFav(data?.name || "")}>
+              <FavButton onClick={() => toggleFav(data?.name || "")}>
                 <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
-              </button>
+              </FavButton>
               <h2>{data?.koreaName}</h2>
               <Link to={`/pokemon/${data?.name}`}>
                 <ImageContainer>

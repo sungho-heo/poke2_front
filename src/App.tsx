@@ -75,7 +75,6 @@ const GlobalStyle = createGlobalStyle`
       font-family: 'Noto Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
       margin: 0;
       background-color: ${({ theme }) => theme.backgroundColor};
-      color: ${({ theme }) => theme.textColor}
       transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -90,11 +89,9 @@ const GlobalStyle = createGlobalStyle`
   p {
     font-size: 15px;
     font-weight: 700;
-    color: ${({ theme }) => theme.textColor}
   }
 
   a {
-    color: ${({ theme }) => theme.textColor}
     font-weight: 500;
     text-decoration-line: none;    
   }
@@ -108,6 +105,7 @@ const GlobalStyle = createGlobalStyle`
     justfy-content: center;
   }
   *{
+      color: black;
       box-sizing: border-box;
   }
 label {
@@ -122,8 +120,14 @@ label {
       padding: 0;
   }
 
-  h2{
+  p{
     color: ${({ theme }) => theme.textColor};
+  }
+  h1{
+      color: ${({ theme }) => theme.textColor};
+  }
+  h2{
+      color: ${({ theme }) => theme.textColor};
   }
 
   h3{
@@ -136,9 +140,9 @@ label {
   h4{
     font-size: 16px;
     font-weight: 500;
-    color: ${({ theme }) => theme.textColor};
     line-height: 1.2;
     margin-bottom: 5px;
+    color: ${({ theme }) => theme.textColor};
   }
 `;
 
