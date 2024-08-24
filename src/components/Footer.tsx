@@ -14,17 +14,26 @@ const LinkText = styled.a`
   color: #00bfff;
 `;
 
+const TextColor = styled.p`
+  color: white;
+  text-transform: uppercase;
+`;
+
 const Footer: React.FC = () => {
   return (
     <FooterContainer>
       <div>
-        이메일:
-        <LinkText href="mailto: hurgj123kr@gmail.com">
-          hurgj123kr@gmail.com
-        </LinkText>
+        <TextColor>
+          이메일:&nbsp;
+          <LinkText href="mailto: hurgj123kr@gmail.com">
+            hurgj123kr@gmail.com
+          </LinkText>
+        </TextColor>
       </div>
       <div>
-        &copy; {new Date().getFullYear()} Sungho Heo. All rights reserved.
+        <TextColor>
+          &copy; {new Date().getFullYear()} Sungho Heo. All rights reserved.
+        </TextColor>
       </div>
     </FooterContainer>
   );
