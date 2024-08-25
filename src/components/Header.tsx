@@ -18,6 +18,9 @@ const LogoContainer = styled.h1`
   width: 17%;
   align-items: center;
   justify-content: center;
+  border: 1px solid;
+  border-color: ${({ theme }) => theme.textColor};
+  border-radius: 20px;
 `;
 
 // header
@@ -31,7 +34,7 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   height: 98px;
-  box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 20px 0px ${({ theme }) => theme.boxShadowColor};
 `;
 
 // HeaderList
@@ -65,7 +68,6 @@ const UrlText = styled.p`
   text-transform: uppercase;
   color: ${({ theme }) => theme.textColor};
 `;
-
 const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   const { token, logout } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
