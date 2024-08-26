@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
 import { Logo } from "../styles/CommonStyles";
-import { lightTheme } from "../themes";
+import { lightTheme, darkTheme } from "../themes";
 
 // type
 interface HeaderProps {
@@ -19,7 +19,9 @@ const LogoContainer = styled.h1`
   align-items: center;
   justify-content: center;
   border: 1px solid;
-  border-color: ${({ theme }) => theme.textColor};
+  border-color: ${({ theme }) =>
+    theme === darkTheme ? theme.textColor : "transparent"};
+
   border-radius: 20px;
 `;
 
