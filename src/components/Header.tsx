@@ -36,7 +36,6 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   height: 98px;
-  box-shadow: 0 1px 20px 0px ${({ theme }) => theme.boxShadowColor};
 `;
 
 // HeaderList

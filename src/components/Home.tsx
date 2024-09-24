@@ -41,6 +41,8 @@ const SearchInput = styled.input`
   left: 0;
   height: 55px;
   background: #0e0e0e;
+  color: white;
+  font-size: 20px;
   border-radius: 0 !important;
 `;
 const PokemonLogo = styled.img`
