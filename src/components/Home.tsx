@@ -96,6 +96,7 @@ const FavButton = styled.button`
 `;
 
 const Home: React.FC = () => {
+  const [searchInput, setSearchInput] = useState<string>("");
   const [searchPokemon, setSearchPokemon] = useState<string>("");
   const { token, fav, setFav } = useAuth();
 
@@ -145,8 +146,13 @@ const Home: React.FC = () => {
   };
 
   // search
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchPokemon(event.target.value);
+  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSearchPokemon(searchInput.trim());
   };
 
   const filterPokemon = searchPokemon
@@ -161,7 +167,7 @@ const Home: React.FC = () => {
   return (
     <Container>
       <SearchContainer>
-        <form>
+        <form onSubmit={handleSearchSubmit}>
           <SearchRow>
             <LogoContainer>
               <PokemonLogo src="./logo.png" />
@@ -171,8 +177,8 @@ const Home: React.FC = () => {
                 <SearchInput
                   type="text"
                   placeholder="포켓몬 이름을 입력해주세요."
-                  value={searchPokemon}
-                  onChange={handleSearch}
+                  value={searchInput}
+                  onChange={handleSearchInput}
                 />
                 <SearchIconButton type="submit">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
