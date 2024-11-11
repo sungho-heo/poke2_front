@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/api/auth";
+const API_URL = "https://poke2-backend.onrender.com/api/auth";
 
 // 회원가입 데이터 타입.
 export interface SignupParams {
