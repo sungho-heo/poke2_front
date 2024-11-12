@@ -40,7 +40,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <AuthProvider>
             <Header toggleTheme={toggleTheme} theme={theme} />
             {notification && (
