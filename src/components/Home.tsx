@@ -209,6 +209,7 @@ const Home: React.FC = () => {
                     <PokemonImage
                       src={data?.sprites.front_default}
                       alt={data?.name}
+                      loading="lazy"
                     />
                   </PokemonImageContainer>
                 </ImageContainer>
