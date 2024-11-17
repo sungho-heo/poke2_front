@@ -109,6 +109,7 @@ const Home: React.FC = () => {
     queryKey: ["pokemonList"],
     queryFn: () => fetchPokemonList(),
     staleTime: 1000 * 60 * 5, // 5분
+    gcTime: 1000 * 60 * 10, // 10 minutes 캐싱 설정.
   });
 
   // 받아온 포켓몬의 상세 데이터.
