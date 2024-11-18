@@ -44,7 +44,7 @@ const Signup: React.FC<NotificationProps> = ({ showNotification }) => {
   return (
     <SignupSection>
       <TitileContainer>
-        <Logo2 src="./main.png" alt="Signup" />
+        <Logo2 src={`${import.meta.env.BASE_URL}main.png`} alt="Signup" />
         <FormContainer>
           <form onSubmit={handleSubmit}>
             <FormGroup>

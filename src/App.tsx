@@ -40,7 +40,11 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router
+          basename={
+            process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "/"
+          }
+        >
           <AuthProvider>
             <Header toggleTheme={toggleTheme} theme={theme} />
             {notification && (
