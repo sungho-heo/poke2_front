@@ -171,7 +171,7 @@ const Home: React.FC = () => {
         <form onSubmit={handleSearchSubmit}>
           <SearchRow>
             <LogoContainer>
-              <PokemonLogo src="./logo.png" />
+              <PokemonLogo src="/logo.png" />
             </LogoContainer>
             <InputButtonContainer>
               <InputButtonContainer2>
