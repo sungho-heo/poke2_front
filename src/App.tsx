@@ -42,7 +42,9 @@ const App: React.FC = () => {
         <GlobalStyle />
         <Router
           basename={
-            process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "/"
+            process.env.NODE_ENV === "production"
+              ? import.meta.env.BASE_URL
+              : "/"
           }
         >
           <AuthProvider>
