@@ -1100,7 +1100,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 `,Pm=z.p`
   color: white;
   text-transform: uppercase;
-`,LP=()=>k.jsxs(NP,{children:[k.jsx("div",{children:k.jsxs(Pm,{children:["이메일: ",k.jsx(AP,{href:"mailto: hurgj123kr@gmail.com",children:"hurgj123kr@gmail.com"})]})}),k.jsx("div",{children:k.jsxs(Pm,{children:["© ",new Date().getFullYear()," Sungho Heo. All rights reserved."]})})]});var jP={};const IP=()=>{const[e,t]=O.useState(bs),[n,r]=O.useState(null),i=new sk,o=()=>{t(e===bs?g1:bs)},a=l=>{r(l)},s=()=>{r(null)};return k.jsx(pk,{client:i,children:k.jsxs(yE,{theme:e,children:[k.jsx(FP,{}),k.jsx(BS,{basename:jP.PUBLIC_URL,children:k.jsxs(tP,{children:[k.jsx(EP,{toggleTheme:o,theme:e}),n&&k.jsx(v1,{message:n,onClose:s}),k.jsxs(IS,{children:[k.jsx(Ur,{path:"/",element:k.jsx(fP,{})}),k.jsx(Ur,{path:"/login",element:k.jsx(PP,{showNotification:a})}),k.jsx(Ur,{path:"/signup",element:k.jsx(OP,{showNotification:a})}),k.jsx(Ur,{path:"/pokemon/:name",element:k.jsx(gP,{})}),k.jsx(Ur,{path:"/profile",element:k.jsx(TP,{})})]}),k.jsx(LP,{})]})})]})})},FP=SE`
+`,LP=()=>k.jsxs(NP,{children:[k.jsx("div",{children:k.jsxs(Pm,{children:["이메일: ",k.jsx(AP,{href:"mailto: hurgj123kr@gmail.com",children:"hurgj123kr@gmail.com"})]})}),k.jsx("div",{children:k.jsxs(Pm,{children:["© ",new Date().getFullYear()," Sungho Heo. All rights reserved."]})})]}),jP=()=>{const[e,t]=O.useState(bs),[n,r]=O.useState(null),i=new sk,o=()=>{t(e===bs?g1:bs)},a=l=>{r(l)},s=()=>{r(null)};return k.jsx(pk,{client:i,children:k.jsxs(yE,{theme:e,children:[k.jsx(IP,{}),k.jsx(BS,{basename:"/poke2_front/",children:k.jsxs(tP,{children:[k.jsx(EP,{toggleTheme:o,theme:e}),n&&k.jsx(v1,{message:n,onClose:s}),k.jsxs(IS,{children:[k.jsx(Ur,{path:"/",element:k.jsx(fP,{})}),k.jsx(Ur,{path:"/login",element:k.jsx(PP,{showNotification:a})}),k.jsx(Ur,{path:"/signup",element:k.jsx(OP,{showNotification:a})}),k.jsx(Ur,{path:"/pokemon/:name",element:k.jsx(gP,{})}),k.jsx(Ur,{path:"/profile",element:k.jsx(TP,{})})]}),k.jsx(LP,{})]})})]})})},IP=SE`
   body {
       font-family: 'Noto Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
       margin: 0;
@@ -1174,4 +1174,4 @@ label {
     margin-bottom: 5px;
     color: ${({theme:e})=>e.textColor};
   }
-`;Lu.createRoot(document.getElementById("root")).render(k.jsx(Fe.StrictMode,{children:k.jsx(IP,{})}));
+`;Lu.createRoot(document.getElementById("root")).render(k.jsx(Fe.StrictMode,{children:k.jsx(jP,{})}));
