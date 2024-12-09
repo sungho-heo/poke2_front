@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/api/fav";
+const API_URL = "https://poke2-backend.onrender.com/api/fav";
 
 // 로그인한 유저의 포켓몬 즐겨찾기 데이터를 가져옴.
 export const fetchFav = async (token: string) => {
