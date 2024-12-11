@@ -116,11 +116,13 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
         ) : (
           <ul>
             <HeaderLink>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">
+                <UrlText>Profile</UrlText>
+              </Link>
             </HeaderLink>
             <HeaderLink>
               <Link to="/" onClick={handleLogout}>
-                Logout
+                <UrlText>Logout</UrlText>
               </Link>
             </HeaderLink>
           </ul>
