@@ -74,6 +74,9 @@ const Login: React.FC<NotificationProps> = ({ showNotification }) => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSubmit(e);
+                }}
               />
             </FormGroup>
             <Button type="submit">Login</Button>
