@@ -1064,6 +1064,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   list-style: none;
   margin-right: 20px;
   width: 100%;
+  color: ${({theme:e})=>e.textColor};
 `,kP=z.button`
   width: 30%;
   cursor: pointer;
