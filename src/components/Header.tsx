@@ -51,6 +51,7 @@ const HeaderLink = styled.li`
   list-style: none;
   margin-right: 20px;
   width: 100%;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const ModeButton = styled.button`
