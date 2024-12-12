@@ -27,7 +27,7 @@ export const authSection = styled.section`
 export const Logo = styled.img`
   vertical-align: top;
   width: 150px;
-  max-width: 100%;
+  height: 150px;
 }
 `;
 

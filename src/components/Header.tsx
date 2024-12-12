@@ -11,6 +11,14 @@ interface HeaderProps {
   toggleTheme: () => void;
   theme: any;
 }
+
+interface ImageCDNProps {
+  src: string; // CDN에 업로드할 이미지 경로
+  alt: string; // 이미지 대신에 들어갈 텍스트
+  width?: number; // 이미지 너비
+  height?: number; // 이미지 높이
+}
+
 // css
 // 홈페이지 메인 타이틀
 const LogoContainer = styled.h1`
@@ -70,6 +78,11 @@ const UrlText = styled.p`
   text-transform: uppercase;
   color: ${({ theme }) => theme.textColor};
 `;
+
+const ImageCDN: React.FC<ImageCDNProps> = ({ src, alt, width, height }) => {
+  const cdnUrl = `https://res.cloudinary.com/demo/image/upload/w_${width},h_${height}/${src}`;
+  return <img src={cdnUrl} alt={alt} />;
+};
 const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   const { token, logout } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
@@ -93,7 +106,8 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
       )}
       <LogoContainer>
         <Link to="/">
-          <Logo src="./main.png" alt="Home" />
+          {/* <Logo src="./main.png" alt="Home" /> */}
+          <ImageCDN src="main.png" alt="샘플 이미지" width={300} height={300} />
         </Link>
       </LogoContainer>
       <HeaderList>
