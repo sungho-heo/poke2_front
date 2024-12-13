@@ -24,13 +24,6 @@ export const authSection = styled.section`
   box-sizing: border-box;
 `;
 
-export const Logo = styled.img`
-  vertical-align: top;
-  width: 150px;
-  height: 150px;
-}
-`;
-
 export const Logo2 = styled.img`
   vertical-align: top;
   width: 200px;

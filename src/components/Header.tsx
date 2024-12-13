@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { IKContext, IKImage } from "imagekitio-react";
 import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
-import { Logo } from "../styles/CommonStyles";
 import { lightTheme, darkTheme } from "../themes";
 
 // type
@@ -11,14 +11,6 @@ interface HeaderProps {
   toggleTheme: () => void;
   theme: any;
 }
-
-interface ImageCDNProps {
-  src: string; // CDN에 업로드할 이미지 경로
-  alt: string; // 이미지 대신에 들어갈 텍스트
-  width?: number; // 이미지 너비
-  height?: number; // 이미지 높이
-}
-
 // css
 // 홈페이지 메인 타이틀
 const LogoContainer = styled.h1`
@@ -79,10 +71,6 @@ const UrlText = styled.p`
   color: ${({ theme }) => theme.textColor};
 `;
 
-const ImageCDN: React.FC<ImageCDNProps> = ({ src, alt, width, height }) => {
-  const cdnUrl = `https://res.cloudinary.com/demo/image/upload/w_${width},h_${height}/${src}`;
-  return <img src={cdnUrl} alt={alt} />;
-};
 const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   const { token, logout } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
@@ -97,52 +85,60 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   };
 
   return (
-    <HeaderContainer>
-      {notification && (
-        <Notification
-          message={notification}
-          onClose={() => setNotification(null)}
-        />
-      )}
-      <LogoContainer>
-        <Link to="/">
-          {/* <Logo src="./main.png" alt="Home" /> */}
-          <ImageCDN src="main.png" alt="샘플 이미지" width={300} height={300} />
-        </Link>
-      </LogoContainer>
-      <HeaderList>
-        <ModeButton onClick={toggleTheme}>
-          {theme === lightTheme ? "Dark Mode" : "Light Mode"}
-        </ModeButton>
-        {!token ? (
-          <ul>
-            <HeaderLink>
-              <Link to="/login">
-                <UrlText>Login</UrlText>
-              </Link>
-            </HeaderLink>
-            <HeaderLink>
-              <Link to="/signup">
-                <UrlText>Signup</UrlText>
-              </Link>
-            </HeaderLink>
-          </ul>
-        ) : (
-          <ul>
-            <HeaderLink>
-              <Link to="/profile">
-                <UrlText>Profile</UrlText>
-              </Link>
-            </HeaderLink>
-            <HeaderLink>
-              <Link to="/" onClick={handleLogout}>
-                <UrlText>Logout</UrlText>
-              </Link>
-            </HeaderLink>
-          </ul>
+    <IKContext
+      publicKey="public_EGvbQc9D3kdb1L31NVjPCMgm5do="
+      urlEndpoint="https://ik.imagekit.io/eawpxeejy"
+    >
+      <HeaderContainer>
+        {notification && (
+          <Notification
+            message={notification}
+            onClose={() => setNotification(null)}
+          />
         )}
-      </HeaderList>
-    </HeaderContainer>
+        <LogoContainer>
+          <Link to="/">
+            <IKImage
+              path="/main.png"
+              alt="Home"
+              transformation={[{ height: "150", width: "150", format: "webp" }]}
+            />
+          </Link>
+        </LogoContainer>
+        <HeaderList>
+          <ModeButton onClick={toggleTheme}>
+            {theme === lightTheme ? "Dark Mode" : "Light Mode"}
+          </ModeButton>
+          {!token ? (
+            <ul>
+              <HeaderLink>
+                <Link to="/login">
+                  <UrlText>Login</UrlText>
+                </Link>
+              </HeaderLink>
+              <HeaderLink>
+                <Link to="/signup">
+                  <UrlText>Signup</UrlText>
+                </Link>
+              </HeaderLink>
+            </ul>
+          ) : (
+            <ul>
+              <HeaderLink>
+                <Link to="/profile">
+                  <UrlText>Profile</UrlText>
+                </Link>
+              </HeaderLink>
+              <HeaderLink>
+                <Link to="/" onClick={handleLogout}>
+                  <UrlText>Logout</UrlText>
+                </Link>
+              </HeaderLink>
+            </ul>
+          )}
+        </HeaderList>
+      </HeaderContainer>
+    </IKContext>
   );
 };
 
