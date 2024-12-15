@@ -12,6 +12,7 @@ import {
   faMagnifyingGlass,
   faStar as solidStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { IKImage } from "imagekitio-react";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { fetchPokemonList, PokemonData } from "../api";
 import { addFav, removeFav } from "../api/fav";
@@ -45,7 +46,7 @@ const SearchInput = styled.input`
   font-size: 20px;
   border-radius: 0 !important;
 `;
-const PokemonLogo = styled.img`
+const PokemonLogo = styled.div`
   max-width: 50%;
   display: flex;
   margin-top: 5px;
@@ -171,10 +172,15 @@ const Home: React.FC = () => {
         <form onSubmit={handleSearchSubmit}>
           <SearchRow>
             <LogoContainer>
-              <PokemonLogo
-                src={`${import.meta.env.BASE_URL}logo.png`}
-                alt="logo"
-              />
+              <PokemonLogo>
+                <IKImage
+                  path="/logo.png"
+                  alt="logo"
+                  transformation={[
+                    { height: "50", width: "50", format: "webp" },
+                  ]}
+                />
+              </PokemonLogo>
             </LogoContainer>
             <InputButtonContainer>
               <InputButtonContainer2>

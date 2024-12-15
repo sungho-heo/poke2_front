@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IKContext, IKImage } from "imagekitio-react";
+import { IKImage } from "imagekitio-react";
 import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
 import { lightTheme, darkTheme } from "../themes";
@@ -85,60 +85,55 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
   };
 
   return (
-    <IKContext
-      publicKey="public_EGvbQc9D3kdb1L31NVjPCMgm5do="
-      urlEndpoint="https://ik.imagekit.io/eawpxeejy"
-    >
-      <HeaderContainer>
-        {notification && (
-          <Notification
-            message={notification}
-            onClose={() => setNotification(null)}
+    <HeaderContainer>
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
+      <LogoContainer>
+        <Link to="/">
+          <IKImage
+            path="/main.png"
+            alt="Home"
+            transformation={[{ height: "150", width: "150", format: "webp" }]}
           />
+        </Link>
+      </LogoContainer>
+      <HeaderList>
+        <ModeButton onClick={toggleTheme}>
+          {theme === lightTheme ? "Dark Mode" : "Light Mode"}
+        </ModeButton>
+        {!token ? (
+          <ul>
+            <HeaderLink>
+              <Link to="/login">
+                <UrlText>Login</UrlText>
+              </Link>
+            </HeaderLink>
+            <HeaderLink>
+              <Link to="/signup">
+                <UrlText>Signup</UrlText>
+              </Link>
+            </HeaderLink>
+          </ul>
+        ) : (
+          <ul>
+            <HeaderLink>
+              <Link to="/profile">
+                <UrlText>Profile</UrlText>
+              </Link>
+            </HeaderLink>
+            <HeaderLink>
+              <Link to="/" onClick={handleLogout}>
+                <UrlText>Logout</UrlText>
+              </Link>
+            </HeaderLink>
+          </ul>
         )}
-        <LogoContainer>
-          <Link to="/">
-            <IKImage
-              path="/main.png"
-              alt="Home"
-              transformation={[{ height: "150", width: "150", format: "webp" }]}
-            />
-          </Link>
-        </LogoContainer>
-        <HeaderList>
-          <ModeButton onClick={toggleTheme}>
-            {theme === lightTheme ? "Dark Mode" : "Light Mode"}
-          </ModeButton>
-          {!token ? (
-            <ul>
-              <HeaderLink>
-                <Link to="/login">
-                  <UrlText>Login</UrlText>
-                </Link>
-              </HeaderLink>
-              <HeaderLink>
-                <Link to="/signup">
-                  <UrlText>Signup</UrlText>
-                </Link>
-              </HeaderLink>
-            </ul>
-          ) : (
-            <ul>
-              <HeaderLink>
-                <Link to="/profile">
-                  <UrlText>Profile</UrlText>
-                </Link>
-              </HeaderLink>
-              <HeaderLink>
-                <Link to="/" onClick={handleLogout}>
-                  <UrlText>Logout</UrlText>
-                </Link>
-              </HeaderLink>
-            </ul>
-          )}
-        </HeaderList>
-      </HeaderContainer>
-    </IKContext>
+      </HeaderList>
+    </HeaderContainer>
   );
 };
 

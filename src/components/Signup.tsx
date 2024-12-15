@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { IKImage } from "imagekitio-react";
 import {
   authSection as SignupSection,
   Logo2,
@@ -44,7 +45,13 @@ const Signup: React.FC<NotificationProps> = ({ showNotification }) => {
   return (
     <SignupSection>
       <TitileContainer>
-        <Logo2 src={`${import.meta.env.BASE_URL}main.png`} alt="Signup" />
+        <Logo2>
+          <IKImage
+            path="/main.png"
+            alt="Signup"
+            transformation={[{ height: "200", width: "200", format: "webp" }]}
+          />
+        </Logo2>
         <FormContainer>
           <form onSubmit={handleSubmit}>
             <FormGroup>

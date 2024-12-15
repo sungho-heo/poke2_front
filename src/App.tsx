@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useState } from "react";
+import { IKContext } from "imagekitio-react";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import Header from "./components/Header";
@@ -40,37 +41,42 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router
-          basename={
-            process.env.NODE_ENV === "production"
-              ? import.meta.env.BASE_URL
-              : "/"
-          }
+        <IKContext
+          publicKey="public_EGvbQc9D3kdb1L31NVjPCMgm5do="
+          urlEndpoint="https://ik.imagekit.io/eawpxeejy"
         >
-          <AuthProvider>
-            <Header toggleTheme={toggleTheme} theme={theme} />
-            {notification && (
-              <Notification
-                message={notification}
-                onClose={handleNotification}
-              />
-            )}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/login"
-                element={<Login showNotification={showNotification} />}
-              />
-              <Route
-                path="/signup"
-                element={<Signup showNotification={showNotification} />}
-              />
-              <Route path="/pokemon/:name" element={<Detail />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-            <Footer />
-          </AuthProvider>
-        </Router>
+          <Router
+            basename={
+              process.env.NODE_ENV === "production"
+                ? import.meta.env.BASE_URL
+                : "/"
+            }
+          >
+            <AuthProvider>
+              <Header toggleTheme={toggleTheme} theme={theme} />
+              {notification && (
+                <Notification
+                  message={notification}
+                  onClose={handleNotification}
+                />
+              )}
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/login"
+                  element={<Login showNotification={showNotification} />}
+                />
+                <Route
+                  path="/signup"
+                  element={<Signup showNotification={showNotification} />}
+                />
+                <Route path="/pokemon/:name" element={<Detail />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+              <Footer />
+            </AuthProvider>
+          </Router>
+        </IKContext>
       </ThemeProvider>
     </QueryClientProvider>
   );
