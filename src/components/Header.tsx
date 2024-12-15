@@ -98,6 +98,8 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
             path="/main.png"
             alt="Home"
             transformation={[{ height: "150", width: "150", format: "webp" }]}
+            loading="eager"
+            priority
           />
         </Link>
       </LogoContainer>
