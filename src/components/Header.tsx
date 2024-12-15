@@ -97,9 +97,15 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
           <IKImage
             path="/main.png"
             alt="Home"
-            transformation={[{ height: "150", width: "150", format: "webp" }]}
-            loading="eager"
-            priority
+            loading="lazy"
+            lqip={{ active: true }}
+            transformation={[
+              {
+                height: "150",
+                width: "150",
+                format: "webp",
+              },
+            ]}
           />
         </Link>
       </LogoContainer>
