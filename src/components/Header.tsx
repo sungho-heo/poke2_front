@@ -97,7 +97,6 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
           <IKImage
             path="/main.png"
             alt="Home"
-            loading="lazy"
             lqip={{ active: true }}
             transformation={[
               {

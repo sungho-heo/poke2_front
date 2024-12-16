@@ -176,6 +176,7 @@ const Home: React.FC = () => {
                 <IKImage
                   path="/logo.png"
                   alt="logo"
+                  lqip={{ active: true }}
                   transformation={[
                     { height: "50", width: "50", format: "webp" },
                   ]}

@@ -60,6 +60,7 @@ const Login: React.FC<NotificationProps> = ({ showNotification }) => {
           <IKImage
             path="/main.png"
             alt="Login"
+            lqip={{ active: true }}
             transformation={[{ height: "200", width: "200", format: "webp" }]}
           />
         </Logo2>
