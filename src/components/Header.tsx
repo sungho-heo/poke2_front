@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ toggleTheme, theme }) => {
         />
       )}
       <LogoContainer>
-        <Link to="/">
+        <Link to="/" rel="preload">
           <IKImage
             path="/main.png"
             alt="Home"
