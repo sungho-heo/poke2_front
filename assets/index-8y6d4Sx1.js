@@ -913,12 +913,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   align-items: center;
   justify-content: center;
   width: 235px;
-  height: 235px;
+  height: auto;
   aspect-ratio: 1; /* 가로 세로 비율을 1:1로 설정 */
 `,z1=V.img`
   width: 100%;
   height: 100%; /* 이미지 크기를 고정 */
-  object-fit: cover; /* 비율을 맞추면서 잘리지 않도록 설정 */
+  object-fit: contain;
   &:hover {
     transition: transform 0.5s;
     transform: scale(1) translate(0, -5%);
@@ -970,11 +970,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-color: #da343c !important;
   color: #fff !important;
   cursor: pointer;
-  font-size: 24px; /* 아이콘 크기 고정 */
 `,PO=V.button`
   background-color: #ffff00;
   border-radius: 10px solid black;
-`,OO=()=>{const[e,t]=O.useState(""),[n,r]=O.useState(""),{token:i,fav:o,setFav:a}=Aa(),{data:s,error:l,isLoading:u}=Yy({queryKey:["pokemonList"],queryFn:()=>cO(),staleTime:1e3*60*5,gcTime:1e3*60*10}),c=WE({queries:((s==null?void 0:s.results)||[]).map(m=>({queryKey:["pokemon",m.name],queryFn:()=>hp(m.name),staleTime:1e3*60*5}))}),f=cl({mutationFn:mO,onSuccess:m=>{a(m.fav)}}),d=cl({mutationFn:vO,onSuccess:m=>{a(m.fav)}}),v=m=>{Array.isArray(o)&&o.includes(m)?d.mutate({token:i,pokemonName:m}):f.mutate({token:i,pokemonName:m})},g=m=>{t(m.target.value)},w=m=>{m.preventDefault(),r(e.trim())},x=n?c.filter(m=>{var h;return(h=m.data)==null?void 0:h.koreaName.includes(n)}):c;return u?E.jsx("h1",{children:"...Loading"}):l instanceof Error?E.jsxs("h1",{children:["Error: ",l.message]}):E.jsxs(A1,{children:[E.jsx(yO,{children:E.jsx("form",{onSubmit:w,children:E.jsxs(xO,{children:[E.jsx(bO,{children:E.jsx(SO,{children:E.jsx(ba,{path:"/logo.png",alt:"logo",lqip:{active:!0},transformation:[{height:"50",width:"50",format:"webp"}]})})}),E.jsx(EO,{children:E.jsxs(kO,{children:[E.jsx(wO,{type:"text",placeholder:"포켓몬 이름을 입력해주세요.",value:e,onChange:g}),E.jsx(CO,{type:"submit",children:E.jsx(ca,{icon:FP})})]})})]})})}),E.jsx(T1,{children:x==null?void 0:x.map((m,h)=>{const{data:p,error:S,isLoading:b}=m;if(b)return E.jsx("h1",{children:"Loading..."},h);if(S instanceof Error)return E.jsxs("h1",{children:["Error:",S.message]},h);const R=Array.isArray(o)&&o.includes((p==null?void 0:p.name)||"");return E.jsxs(M1,{children:[E.jsx(PO,{onClick:()=>v((p==null?void 0:p.name)||""),children:E.jsx(ca,{icon:R?a1:MP})}),E.jsx("h2",{children:p==null?void 0:p.koreaName}),E.jsxs(pr,{to:`/pokemon/${p==null?void 0:p.name}`,children:[E.jsx(D1,{children:E.jsx($1,{children:E.jsx(z1,{src:p==null?void 0:p.sprites.front_default,alt:p==null?void 0:p.name,loading:"lazy"})})}),E.jsx("p",{children:p==null?void 0:p.types.map(C=>C.type.name).join(",")})]})]},h)})})]})},Bu=V.div`
+`,OO=()=>{const[e,t]=O.useState(""),[n,r]=O.useState(""),{token:i,fav:o,setFav:a}=Aa(),{data:s,error:l,isLoading:u}=Yy({queryKey:["pokemonList"],queryFn:()=>cO(),staleTime:1e3*60*5,gcTime:1e3*60*10}),c=WE({queries:((s==null?void 0:s.results)||[]).map(m=>({queryKey:["pokemon",m.name],queryFn:()=>hp(m.name),staleTime:1e3*60*5}))}),f=cl({mutationFn:mO,onSuccess:m=>{a(m.fav)}}),d=cl({mutationFn:vO,onSuccess:m=>{a(m.fav)}}),v=m=>{Array.isArray(o)&&o.includes(m)?d.mutate({token:i,pokemonName:m}):f.mutate({token:i,pokemonName:m})},g=m=>{t(m.target.value)},w=m=>{m.preventDefault(),r(e.trim())},x=n?c.filter(m=>{var h;return(h=m.data)==null?void 0:h.koreaName.includes(n)}):c;return u?E.jsx("h1",{children:"...Loading"}):l instanceof Error?E.jsxs("h1",{children:["Error: ",l.message]}):E.jsxs(A1,{children:[E.jsx(yO,{style:{minHeight:"300px"},children:E.jsx("form",{onSubmit:w,children:E.jsxs(xO,{children:[E.jsx(bO,{children:E.jsx(SO,{children:E.jsx(ba,{path:"/logo.png",alt:"logo",lqip:{active:!0},transformation:[{height:"50",width:"50",format:"webp"}]})})}),E.jsx(EO,{children:E.jsxs(kO,{children:[E.jsx(wO,{type:"text",placeholder:"포켓몬 이름을 입력해주세요.",value:e,onChange:g}),E.jsx(CO,{type:"submit",children:E.jsx(ca,{icon:FP})})]})})]})})}),E.jsx(T1,{children:x==null?void 0:x.map((m,h)=>{const{data:p,error:S,isLoading:b}=m;if(b)return E.jsx("h1",{children:"Loading..."},h);if(S instanceof Error)return E.jsxs("h1",{children:["Error:",S.message]},h);const R=Array.isArray(o)&&o.includes((p==null?void 0:p.name)||"");return E.jsxs(M1,{style:{minHeight:"235px"},children:[E.jsx(PO,{onClick:()=>v((p==null?void 0:p.name)||""),children:E.jsx(ca,{icon:R?a1:MP})}),E.jsx("h2",{children:p==null?void 0:p.koreaName}),E.jsxs(pr,{to:`/pokemon/${p==null?void 0:p.name}`,rel:"preload",children:[E.jsx(D1,{children:E.jsx($1,{children:E.jsx(z1,{src:p==null?void 0:p.sprites.front_default,alt:p==null?void 0:p.name,loading:"lazy"})})}),E.jsx("p",{children:p==null?void 0:p.types.map(C=>C.type.name).join(",")})]})]},h)})})]})},Bu=V.div`
   max-width: 1250px;
   width: 100%;
   margin-top: 200px;
