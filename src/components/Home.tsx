@@ -168,7 +168,7 @@ const Home: React.FC = () => {
   if (listError instanceof Error) return <h1>Error: {listError.message}</h1>;
   return (
     <Container>
-      <SearchContainer style={{ minHeight: "300px" }}>
+      <SearchContainer>
         <form onSubmit={handleSearchSubmit}>
           <SearchRow>
             <LogoContainer>
@@ -209,12 +209,12 @@ const Home: React.FC = () => {
           const isFav = Array.isArray(fav) && fav.includes(data?.name || "");
 
           return (
-            <PokemonList key={index} style={{ minHeight: "235px" }}>
+            <PokemonList key={index}>
               <FavButton onClick={() => toggleFav(data?.name || "")}>
                 <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
               </FavButton>
               <h2>{data?.koreaName}</h2>
-              <Link to={`/pokemon/${data?.name}`} rel="preload">
+              <Link to={`/pokemon/${data?.name}`}>
                 <ImageContainer>
                   <PokemonImageContainer>
                     <PokemonImage
