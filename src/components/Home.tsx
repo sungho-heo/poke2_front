@@ -88,7 +88,6 @@ const SearchIconButton = styled.button`
   border-color: #da343c !important;
   color: #fff !important;
   cursor: pointer;
-  font-size: 24px; /* 아이콘 크기 고정 */
 `;
 
 // fav button
@@ -169,7 +168,7 @@ const Home: React.FC = () => {
   if (listError instanceof Error) return <h1>Error: {listError.message}</h1>;
   return (
     <Container>
-      <SearchContainer>
+      <SearchContainer style={{ minHeight: "300px" }}>
         <form onSubmit={handleSearchSubmit}>
           <SearchRow>
             <LogoContainer>
@@ -210,12 +209,12 @@ const Home: React.FC = () => {
           const isFav = Array.isArray(fav) && fav.includes(data?.name || "");
 
           return (
-            <PokemonList key={index}>
+            <PokemonList key={index} style={{ minHeight: "235px" }}>
               <FavButton onClick={() => toggleFav(data?.name || "")}>
                 <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
               </FavButton>
               <h2>{data?.koreaName}</h2>
-              <Link to={`/pokemon/${data?.name}`}>
+              <Link to={`/pokemon/${data?.name}`} rel="preload">
                 <ImageContainer>
                   <PokemonImageContainer>
                     <PokemonImage

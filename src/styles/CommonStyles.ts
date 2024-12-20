@@ -103,14 +103,14 @@ export const PokemonImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 235px;
-  height: 235px;
+  height: auto;
   aspect-ratio: 1; /* 가로 세로 비율을 1:1로 설정 */
 `;
 
 export const PokemonImage = styled.img`
   width: 100%;
   height: 100%; /* 이미지 크기를 고정 */
-  object-fit: cover; /* 비율을 맞추면서 잘리지 않도록 설정 */
+  object-fit: contain;
   &:hover {
     transition: transform 0.5s;
     transform: scale(1) translate(0, -5%);
