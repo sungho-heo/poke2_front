@@ -914,13 +914,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   justify-content: center;
   width: 235px;
   height: 235px;
+  aspect-ratio: 1; /* 가로 세로 비율을 1:1로 설정 */
 `,z1=V.img`
-  width: 80%;
-  height: auto;
-  max-height: 100%;
+  width: 100%;
+  height: 100%; /* 이미지 크기를 고정 */
+  object-fit: cover; /* 비율을 맞추면서 잘리지 않도록 설정 */
   &:hover {
     transition: transform 0.5s;
-    transform: scale(1.05) translate(0, -5%);
+    transform: scale(1) translate(0, -5%);
   }
 `,hp=async e=>{var a;const t=await fO(e),r=((a=(await dO(e)).names.find(s=>s.language.name==="ko"))==null?void 0:a.name)||t.name,i=await Promise.all(t.types.map(async s=>{var c;const u=((c=(await pO(s.type.url)).names.find(f=>f.language.name==="ko"))==null?void 0:c.name)||s.type.name;return{...s,type:{...s.type,name:u}}})),o=await Promise.all(t.abilities.map(async s=>{var c;const u=((c=(await hO(s.ability.url)).names.find(f=>f.language.name==="ko"))==null?void 0:c.name)||s.ability.name;return{...s,ability:{...s.ability,name:u}}}));return{...t,koreaName:r,types:i,abilities:o}},U1=O.createContext(void 0),gO=({children:e})=>{const[t,n]=O.useState(()=>localStorage.getItem("token")),[r,i]=O.useState([]);O.useEffect(()=>{if(t){localStorage.setItem("token",t);const s=new Date().getTime()+60*60*1e3;localStorage.setItem("tokenLimit",s.toString())}else localStorage.removeItem("token"),localStorage.removeItem("tokenLimit")},[t]);const o=async s=>{n(s);try{const l=await Ff(s);i(l)}catch(l){console.error("Failed to fetch fav on login",l)}},a=s=>{n(null),i([]),s&&s("Logout successful!")};return O.useEffect(()=>{const s=()=>{const c=localStorage.getItem("tokenLimit");c&&new Date().getTime()>Number(c)&&a()},l=async()=>{if(t)try{const c=await Ff(t);i(c)}catch(c){console.error("Failed to fetch fav",c)}else i([])};s(),l();const u=setInterval(s,60*1e3);return()=>clearInterval(u)},[t]),E.jsx(U1.Provider,{value:{token:t,setToken:n,login:o,logout:a,fav:r,setFav:i},children:e})},Aa=()=>{const e=O.useContext(U1);if(!e)throw new Error("useAuth must be used within an AuthProvider");return e},yO=V.div`
   width: 100%;
@@ -969,6 +970,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-color: #da343c !important;
   color: #fff !important;
   cursor: pointer;
+  font-size: 24px; /* 아이콘 크기 고정 */
 `,PO=V.button`
   background-color: #ffff00;
   border-radius: 10px solid black;
