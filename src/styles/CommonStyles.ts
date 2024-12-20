@@ -107,10 +107,11 @@ export const PokemonImageContainer = styled.div`
 `;
 
 export const PokemonImage = styled.img`
-  width: 100%;
+  width: 80%;
   height: auto;
+  max-height: 100%;
   &:hover {
     transition: transform 0.5s;
-    transform: scale(1) translate(0, -5%);
+    transform: scale(1.05) translate(0, -5%);
   }
 `;
