@@ -88,6 +88,7 @@ const SearchIconButton = styled.button`
   border-color: #da343c !important;
   color: #fff !important;
   cursor: pointer;
+  font-size: 24px; /* 아이콘 크기 고정 */
 `;
 
 // fav button
