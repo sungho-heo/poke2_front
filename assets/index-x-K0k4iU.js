@@ -912,8 +912,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 10px 10px;
+  width: 235px;
+  height: 235px;
 `,z1=V.img`
   width: 100%;
   height: auto;
