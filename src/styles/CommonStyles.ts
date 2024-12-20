@@ -102,8 +102,8 @@ export const PokemonImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 10px 10px;
+  width: 235px;
+  height: 235px;
 `;
 
 export const PokemonImage = styled.img`
