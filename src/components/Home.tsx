@@ -94,6 +94,7 @@ const SearchIconButton = styled.button`
 const FavButton = styled.button`
   background-color: #ffff00;
   border-radius: 10px solid black;
+  cursor: pointer;
 `;
 
 const Home: React.FC = () => {

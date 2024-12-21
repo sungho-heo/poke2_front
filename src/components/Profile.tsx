@@ -5,7 +5,6 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
-  Container,
   GridContainer,
   PokemonList,
   ImageContainer,
@@ -17,7 +16,8 @@ import { getPokemonDataKorea } from "../utils";
 
 // css
 const LoadingContainer = styled.div`
-  margin-top: 200px;
+  display: flex;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -26,12 +26,20 @@ const ErrorText = styled.h1`
   width: 100%;
 `;
 
-const ListContainer = styled.div`
-  width:100%;
-  max-width: 1000px;
-  display:flex;
-  flex-wrap: wrap;
-}`;
+const Title = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  justify-content: cneter;
+  align-items: center;
+`;
 
 // Profile
 const Profile: React.FC = () => {
@@ -60,41 +68,41 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ListContainer>
+    <ProfileContainer>
+      <Title>
         <h2>가장 좋아하는 포켓몬</h2>
+      </Title>
+      {pokemonData.length > 0 ? (
         <GridContainer>
-          {pokemonData.length > 0 ? (
-            pokemonData.map((pokemon) => (
-              <PokemonList key={pokemon.koreaName}>
-                <FontAwesomeIcon icon={solidStar} />
-                <h2>{pokemon?.koreaName}</h2>
-                <Link to={`/pokemon/${pokemon?.name}`}>
-                  <ImageContainer>
-                    <PokemonImageContainer>
-                      <PokemonImage
-                        src={pokemon?.sprites.front_default}
-                        alt={pokemon?.name}
-                      />
-                    </PokemonImageContainer>
-                  </ImageContainer>
-                  <p>
-                    타입:
-                    {pokemon?.types
-                      .map((typeDetail) => typeDetail.type.name)
-                      .join(",")}
-                  </p>
-                </Link>
-              </PokemonList>
-            ))
-          ) : (
-            <LoadingContainer>
-              <ErrorText>즐겨찾기한 포켓몬이 존재하지않습니다.</ErrorText>
-            </LoadingContainer>
-          )}
+          {pokemonData.map((pokemon) => (
+            <PokemonList key={pokemon.koreaName}>
+              <FontAwesomeIcon icon={solidStar} />
+              <h2>{pokemon?.koreaName}</h2>
+              <Link to={`/pokemon/${pokemon?.name}`}>
+                <ImageContainer>
+                  <PokemonImageContainer>
+                    <PokemonImage
+                      src={pokemon?.sprites.front_default}
+                      alt={pokemon?.name}
+                    />
+                  </PokemonImageContainer>
+                </ImageContainer>
+                <p>
+                  타입:
+                  {pokemon?.types
+                    .map((typeDetail) => typeDetail.type.name)
+                    .join(",")}
+                </p>
+              </Link>
+            </PokemonList>
+          ))}
         </GridContainer>
-      </ListContainer>
-    </Container>
+      ) : (
+        <LoadingContainer>
+          <ErrorText>즐겨찾기한 포켓몬이 존재하지 않습니다.</ErrorText>
+        </LoadingContainer>
+      )}
+    </ProfileContainer>
   );
 };
 
