@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  UseQueryResult,
-  useQueries,
-  useQuery,
-  useMutation,
-} from "@tanstack/react-query";
+import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,7 +10,7 @@ import {
 import { IKImage } from "imagekitio-react";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { fetchPokemonList, PokemonData } from "../api";
-import { addFav, removeFav } from "../api/fav";
+import { useToggleFav } from "../hooks/useToggleFav";
 import {
   GridContainer,
   Container,
@@ -23,9 +18,9 @@ import {
   ImageContainer,
   PokemonImageContainer,
   PokemonImage,
+  FavButton,
 } from "../styles/CommonStyles";
 import { getPokemonDataKorea } from "../utils";
-import { useAuth } from "../context/AuthContext";
 
 // css
 const SearchContainer = styled.div`
@@ -90,17 +85,10 @@ const SearchIconButton = styled.button`
   cursor: pointer;
 `;
 
-// fav button
-const FavButton = styled.button`
-  background-color: #ffff00;
-  border-radius: 10px solid black;
-  cursor: pointer;
-`;
-
 const Home: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchPokemon, setSearchPokemon] = useState<string>("");
-  const { token, fav, setFav } = useAuth();
+  const { toggleFav, fav } = useToggleFav();
 
   // 포켓몬 이름 받아오기
   const {
@@ -122,31 +110,6 @@ const Home: React.FC = () => {
       staleTime: 1000 * 60 * 5, // 5 minutes
     })),
   }) as UseQueryResult<PokemonData & { koreaName: string }>[];
-
-  // addFav
-  const addFavMutation = useMutation({
-    mutationFn: addFav,
-    onSuccess: (data: { fav: string[] }) => {
-      setFav(data.fav);
-    },
-  });
-
-  // removeFav
-  const removeFavMutation = useMutation({
-    mutationFn: removeFav,
-    onSuccess: (data: { fav: string[] }) => {
-      setFav(data.fav);
-    },
-  });
-
-  // togglefav
-  const toggleFav = (pokemonName: string) => {
-    if (Array.isArray(fav) && fav.includes(pokemonName)) {
-      removeFavMutation.mutate({ token: token!, pokemonName });
-    } else {
-      addFavMutation.mutate({ token: token!, pokemonName });
-    }
-  };
 
   // search
   const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {

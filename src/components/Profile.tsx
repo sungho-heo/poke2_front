@@ -62,6 +62,7 @@ const Profile: React.FC = () => {
     };
     fetchFavPokemonData();
   }, [fav]);
+  console.log(pokemonData);
 
   if (!token) {
     return <ErrorText>Please Signup or Login. </ErrorText>;

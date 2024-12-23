@@ -114,3 +114,10 @@ export const PokemonImage = styled.img`
     transform: scale(1) translate(0, -5%);
   }
 `;
+
+// fav button
+export const FavButton = styled.button`
+  background-color: #ffff00;
+  border-radius: 10px solid black;
+  cursor: pointer;
+`;
