@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IKImage } from "imagekitio-react";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-import { fetchPokemonList, PokemonData } from "../api";
+import { fetchPokemonList, PokemonDataType } from "../api";
 import { useToggleFav } from "../hooks/useToggleFav";
 import {
   GridContainer,
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
       queryFn: () => getPokemonDataKorea(pokemon.name),
       staleTime: 1000 * 60 * 5, // 5 minutes
     })),
-  }) as UseQueryResult<PokemonData & { koreaName: string }>[];
+  }) as UseQueryResult<PokemonDataType & { koreaName: string }>[];
 
   // search
   const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {

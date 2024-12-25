@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import { useToggleFav } from "../hooks/useToggleFav";
 import { useAuth } from "../context/AuthContext";
 import {
   GridContainer,
@@ -10,8 +12,9 @@ import {
   ImageContainer,
   PokemonImageContainer,
   PokemonImage,
+  FavButton,
 } from "../styles/CommonStyles";
-import { PokemonData } from "../api";
+import { PokemonDataType } from "../api";
 import { getPokemonDataKorea } from "../utils";
 
 // css
@@ -43,8 +46,9 @@ const ProfileContainer = styled.div`
 
 // Profile
 const Profile: React.FC = () => {
-  const { token, fav } = useAuth();
-  const [pokemonData, setPokemonData] = useState<PokemonData[]>([]);
+  // const { token, fav } = useAuth();
+  const { toggleFav, fav } = useToggleFav();
+  const [pokemonData, setPokemonData] = useState<PokemonDataType[]>([]);
 
   useEffect(() => {
     const fetchFavPokemonData = async () => {
@@ -62,12 +66,10 @@ const Profile: React.FC = () => {
     };
     fetchFavPokemonData();
   }, [fav]);
-  console.log(pokemonData);
 
-  if (!token) {
-    return <ErrorText>Please Signup or Login. </ErrorText>;
-  }
-
+  const isFav = (pokemonName: string) => {
+    return Array.isArray(fav) && fav.includes(pokemonName);
+  };
   return (
     <ProfileContainer>
       <Title>
@@ -77,7 +79,11 @@ const Profile: React.FC = () => {
         <GridContainer>
           {pokemonData.map((pokemon) => (
             <PokemonList key={pokemon.koreaName}>
-              <FontAwesomeIcon icon={solidStar} />
+              <FavButton onClick={() => toggleFav(pokemon?.name || "")}>
+                <FontAwesomeIcon
+                  icon={isFav(pokemon?.name || "") ? solidStar : regularStar}
+                />
+              </FavButton>
               <h2>{pokemon?.koreaName}</h2>
               <Link to={`/pokemon/${pokemon?.name}`}>
                 <ImageContainer>

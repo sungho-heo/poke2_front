@@ -69,6 +69,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       if (token) {
         try {
           const fetchedFav = await fetchFav(token);
+          console.log("Fetched Fav:", fetchedFav); // 확인
           setFav(fetchedFav);
         } catch (err) {
           console.error("Failed to fetch fav", err);

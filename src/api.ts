@@ -23,7 +23,7 @@ interface PokemonTypeInfo {
 }
 
 // 포켓몬 상세 데이터 타입
-export interface PokemonData {
+export interface PokemonDataType {
   name: string;
   sprites: {
     front_default: string;
