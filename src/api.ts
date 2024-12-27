@@ -84,8 +84,8 @@ export const fetchPokemonList = async (
   return response.data;
 };
 
-export const fetchPokemon = async (name: string): Promise<PokemonData> => {
-  const response = await api.get<PokemonData>(`/pokemon/${name}`);
+export const fetchPokemon = async (name: string): Promise<PokemonDataType> => {
+  const response = await api.get<PokemonDataType>(`/pokemon/${name}`);
   return response.data;
 };
 

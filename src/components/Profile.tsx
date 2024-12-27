@@ -5,7 +5,6 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { useToggleFav } from "../hooks/useToggleFav";
-import { useAuth } from "../context/AuthContext";
 import {
   GridContainer,
   PokemonList,
