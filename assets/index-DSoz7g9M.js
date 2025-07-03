@@ -908,6 +908,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-radius: 10px;
   transition: 0.5s;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `,z1=Q.div`
   display: flex;
   align-items: center;
@@ -926,11 +928,30 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-radius: 10px solid black;
   cursor: pointer;
 `,hp=async e=>{var a;const t=await fO(e),r=((a=(await dO(e)).names.find(s=>s.language.name==="ko"))==null?void 0:a.name)||t.name,i=await Promise.all(t.types.map(async s=>{var c;const u=((c=(await pO(s.type.url)).names.find(f=>f.language.name==="ko"))==null?void 0:c.name)||s.type.name;return{...s,type:{...s.type,name:u}}})),o=await Promise.all(t.abilities.map(async s=>{var c;const u=((c=(await hO(s.ability.url)).names.find(f=>f.language.name==="ko"))==null?void 0:c.name)||s.ability.name;return{...s,ability:{...s.ability,name:u}}}));return{...t,koreaName:r,types:i,abilities:o}},wO=Q.div`
+  max-width: 50%;
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center;
+`,SO=Q.div`
+  width: 90px;
+  min-width: 90px;
+  padding: 0;
+`,xO=Q.div`
+  flex: 1;
+  max-width: inherit;
+`,EO=Q.div`
+  position: relative;
+  float: none !important;
+  width: 100% !important;
+  height: 55px;
+  background: #fff;
+`,kO=Q.div`
   width: 100%;
   margin-top: 100px;
   padding: 30px 25px 20px;
   background-color: #393939 !important;
-`,SO=Q.input`
+`,bO=Q.input`
   position: absolute;
   width: 100%;
   top: 0;
@@ -940,28 +961,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   color: white;
   font-size: 20px;
   border-radius: 0 !important;
-`,xO=Q.div`
-  max-width: 50%;
-  display: flex;
-  margin-top: 5px;
-  align-items: center;
-  justify-content: center;
-`,EO=Q.div`
+`,CO=Q.div`
   display: flex;
   flex-wrap: wrap;
-`,kO=Q.div`
-  flex: 1;
-  max-width: inherit;
-`,bO=Q.div`
-  position: relative;
-  float: none !important;
-  width: 100% !important;
-  height: 55px;
-  background: #fff;
-`,CO=Q.div`
-  width: 90px;
-  min-width: 90px;
-  padding: 0;
 `,PO=Q.button`
   position: absolute;
   right: 0;
@@ -972,7 +974,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-color: #da343c !important;
   color: #fff !important;
   cursor: pointer;
-`,OO=()=>{const[e,t]=O.useState(""),[n,r]=O.useState(""),{toggleFav:i,fav:o}=A1(),{data:a,error:s,isLoading:l}=Gy({queryKey:["pokemonList"],queryFn:()=>cO(),staleTime:1e3*60*5,gcTime:1e3*60*10}),u=QE({queries:((a==null?void 0:a.results)||[]).map(v=>({queryKey:["pokemon",v.name],queryFn:()=>hp(v.name),staleTime:1e3*60*5}))}),c=v=>{t(v.target.value)},f=v=>{v.preventDefault(),r(e.trim())},d=n?u.filter(v=>{var g;return(g=v.data)==null?void 0:g.koreaName.includes(n)}):u;return l?E.jsx("h1",{children:"...Loading"}):s instanceof Error?E.jsxs("h1",{children:["Error: ",s.message]}):E.jsxs(yO,{children:[E.jsx(wO,{children:E.jsx("form",{onSubmit:f,children:E.jsxs(EO,{children:[E.jsx(CO,{children:E.jsx(xO,{children:E.jsx(ba,{path:"/logo.png",alt:"logo",lqip:{active:!0},transformation:[{height:"50",width:"50",format:"webp"}]})})}),E.jsx(kO,{children:E.jsxs(bO,{children:[E.jsx(SO,{type:"text",placeholder:"포켓몬 이름을 입력해주세요.",value:e,onChange:c}),E.jsx(PO,{type:"submit",children:E.jsx(ca,{icon:MP})})]})})]})})}),E.jsx(N1,{children:d==null?void 0:d.map((v,g)=>{const{data:y,error:x,isLoading:m}=v;if(m)return E.jsx("h1",{children:"Loading..."},g);if(x instanceof Error)return E.jsxs("h1",{children:["Error:",x.message]},g);const p=Array.isArray(o)&&o.includes((y==null?void 0:y.name)||"");return E.jsxs(D1,{children:[E.jsx(B1,{onClick:()=>i((y==null?void 0:y.name)||""),children:E.jsx(ca,{icon:p?o1:a1})}),E.jsx("h2",{children:y==null?void 0:y.koreaName}),E.jsxs(pr,{to:`/pokemon/${y==null?void 0:y.name}`,children:[E.jsx($1,{children:E.jsx(z1,{children:E.jsx(U1,{src:y==null?void 0:y.sprites.front_default,alt:y==null?void 0:y.name,loading:"lazy"})})}),E.jsx("p",{children:y==null?void 0:y.types.map(h=>h.type.name).join(",")})]})]},g)})})]})},Bu=Q.div`
+`,OO=()=>{const[e,t]=O.useState(""),[n,r]=O.useState(""),{toggleFav:i,fav:o}=A1(),{data:a,error:s,isLoading:l}=Gy({queryKey:["pokemonList"],queryFn:()=>cO(),staleTime:1e3*60*5,gcTime:1e3*60*10}),u=QE({queries:((a==null?void 0:a.results)||[]).map(v=>({queryKey:["pokemon",v.name],queryFn:()=>hp(v.name),staleTime:1e3*60*5}))}),c=v=>{t(v.target.value)},f=v=>{v.preventDefault(),r(e.trim())},d=n?u.filter(v=>{var g;return(g=v.data)==null?void 0:g.koreaName.includes(n)}):u;return l?E.jsx("h1",{children:"...Loading"}):s instanceof Error?E.jsxs("h1",{children:["Error: ",s.message]}):E.jsxs(yO,{children:[E.jsx(kO,{children:E.jsx("form",{onSubmit:f,children:E.jsxs(CO,{children:[E.jsx(SO,{children:E.jsx(wO,{children:E.jsx(ba,{path:"/logo.png",alt:"logo",lqip:{active:!0},transformation:[{height:"50",width:"50",format:"webp"}]})})}),E.jsx(xO,{children:E.jsxs(EO,{children:[E.jsx(bO,{type:"text",placeholder:"포켓몬 이름을 입력해주세요.",value:e,onChange:c}),E.jsx(PO,{type:"submit",children:E.jsx(ca,{icon:MP})})]})})]})})}),E.jsx(N1,{children:d==null?void 0:d.map((v,g)=>{const{data:y,error:x,isLoading:m}=v;if(m)return E.jsx("h1",{children:"Loading..."},g);if(x instanceof Error)return E.jsxs("h1",{children:["Error:",x.message]},g);const p=Array.isArray(o)&&o.includes((y==null?void 0:y.name)||"");return E.jsxs(D1,{children:[E.jsx(B1,{onClick:()=>i((y==null?void 0:y.name)||""),children:E.jsx(ca,{icon:p?o1:a1})}),E.jsx("h2",{children:y==null?void 0:y.koreaName}),E.jsxs(pr,{to:`/pokemon/${y==null?void 0:y.name}`,children:[E.jsx($1,{children:E.jsx(z1,{children:E.jsx(U1,{src:y==null?void 0:y.sprites.front_default,alt:y==null?void 0:y.name,loading:"lazy"})})}),E.jsx("p",{children:y==null?void 0:y.types.map(h=>h.type.name).join(",")})]})]},g)})})]})},Bu=Q.div`
   max-width: 1250px;
   width: 100%;
   margin-top: 200px;
