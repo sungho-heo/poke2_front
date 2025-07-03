@@ -1,3 +1,4 @@
+// import
 import React, { useState } from "react";
 import styled from "styled-components";
 import { UseQueryResult, useQueries, useQuery } from "@tanstack/react-query";
@@ -23,6 +24,37 @@ import {
 import { getPokemonDataKorea } from "../utils";
 
 // css
+
+const PokemonLogo = styled.div`
+  max-width: 50%;
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LogoContainer = styled.div`
+  width: 90px;
+  min-width: 90px;
+  padding: 0;
+`;
+
+// input css
+const InputButtonContainer = styled.div`
+  flex: 1;
+  max-width: inherit;
+`;
+
+const InputButtonContainer2 = styled.div`
+  position: relative;
+  float: none !important;
+  width: 100% !important;
+  height: 55px;
+  background: #fff;
+`;
+
+// search css
+
 const SearchContainer = styled.div`
   width: 100%;
   margin-top: 100px;
@@ -41,36 +73,10 @@ const SearchInput = styled.input`
   font-size: 20px;
   border-radius: 0 !important;
 `;
-const PokemonLogo = styled.div`
-  max-width: 50%;
-  display: flex;
-  margin-top: 5px;
-  align-items: center;
-  justify-content: center;
-`;
 
 const SearchRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-`;
-
-const InputButtonContainer = styled.div`
-  flex: 1;
-  max-width: inherit;
-`;
-
-const InputButtonContainer2 = styled.div`
-  position: relative;
-  float: none !important;
-  width: 100% !important;
-  height: 55px;
-  background: #fff;
-`;
-
-const LogoContainer = styled.div`
-  width: 90px;
-  min-width: 90px;
-  padding: 0;
 `;
 
 const SearchIconButton = styled.button`
@@ -85,6 +91,7 @@ const SearchIconButton = styled.button`
   cursor: pointer;
 `;
 
+// Home component
 const Home: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchPokemon, setSearchPokemon] = useState<string>("");

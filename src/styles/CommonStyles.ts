@@ -96,6 +96,8 @@ export const ImageContainer = styled.div`
   border-radius: 10px;
   transition: 0.5s;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const PokemonImageContainer = styled.div`
