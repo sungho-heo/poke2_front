@@ -6,10 +6,12 @@ import { useAuth } from "../context/AuthContext";
 import Notification from "./Notification";
 import { lightTheme, darkTheme } from "../themes";
 
+type ThemeType = typeof lightTheme; // 또는 typeof darkTheme
+
 // type
 interface HeaderProps {
   toggleTheme: () => void;
-  theme: any;
+  theme: ThemeType;
 }
 // css
 // 홈페이지 메인 타이틀
